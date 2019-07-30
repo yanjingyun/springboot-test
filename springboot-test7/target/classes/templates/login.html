@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>login</title>
+    <script src="./assets/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+        	console.log("测试引入静态资源文件jquery-3.1.1.min.js...")
+        });
+    </script>
+</head>
+<body>
+<p th:text="${error}"></p>
+<form action="/login" method="post">
+	用户名：<input name="username" required><br>
+	密    码：<input name="password" required><br>
+	记住我<input name="rememberMe" type="checkbox" value="1"><br>
+	<input type="submit" value="登陆"><br>
+</form>
+</body>
+</html>

@@ -1,0 +1,63 @@
+jpa查询:
+	// 1.根据Id查询
+	String userId = "297ea8576c1c8605016c1c860fdd0001"; //查询不到id对应的user实体时会抛异常
+	User user = userRepository.findById(userId).get(); //方法一
+	User one = userRepository.getOne(userId); //方法二
+	//注：SpringDataJpa2.0移除findOne(id)方法
+
+	// 2.方法名查询（需要在Dao层声明）
+	User user = userRepository.findByUsername('admin');
+
+	// 3.自定义SQl查询（使用@Query注解）
+	
+
+	// 4.根据动态条件查询，返回list
+	public void testSelect3() { //根据动态条件查询
+		List<User> list = userRepository.findAll((root, query, builder) -> {
+			List<Predicate> predicates = new ArrayList<>();
+			
+			// 测试and条件：where t.username like ? and t.birthday = ?
+			Predicate p1 = builder.like(root.get("username"), "testPage" + "%");
+			Predicate p2 = builder.equal(root.get("birthday"), Date.valueOf("1994-05-10"));
+			Predicate and = builder.and(p1, p2);
+			predicates.add(and);
+			
+			/*// 测试or条件： where t.username like ? or username = ?
+			Predicate p1 = builder.like(root.get("username"), "testPage" + "%");
+			Predicate p2 = builder.equal(root.get("username"), "testAA1");
+			Predicate or = builder.or(p1, p2);
+			predicates.add(or);*/
+			
+			return builder.and(predicates.toArray(new Predicate[predicates.size()]));
+		});
+		for (User user : list) {
+			System.out.println(user);
+		}
+	}
+
+	// 5.根据动态条件查询+分页+排序，返回page
+	public void testSelect4() { //根据动态条件查询+分页+排序
+		int pageNumber = 2; //当前页
+		int pageSize = 10; //每页显示数
+		// Pageable request = PageRequest.of(pageIndex, pageSize); //不排序
+		
+		Sort sort = new Sort(Direction.DESC, "birthday"); //排序
+		Pageable request = PageRequest.of(pageNumber, pageSize, sort);
+		
+		Page<User> page = userRepository.findAll((root, query, builder) -> {
+			List<Predicate> predicates = new ArrayList<>();
+			predicates.add(builder.like(root.get("username"), "testPage" + "%")); //动态传值
+			
+			return builder.and(predicates.toArray(new Predicate[predicates.size()]));
+		}, request);
+		
+		// 总数据为23条，测试如下 0：1~10 1：11~20 2：21~23 3：无数据输出
+		List<User> list = page.getContent();
+		for (User user : list) {
+			System.out.println(user);
+		}
+	}
+
+jpa查询（原生sql）
+	使用entityManager查询，详情查询BaseSqlDao相关api，测试用例参照UserTest类相关。
+	
