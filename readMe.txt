@@ -102,4 +102,11 @@ springboot-test9: 测试springCache缓存注解
 		@Caching	--构建复杂缓存。
 
 
+
+springboot-test10
+	--前言：@RequestBody只能是一个参数，且不适应user.name这样的传值
 	自定义HandlerMethodArgumentResolver，使得从页面传进来的user.id, user.name这些字段自动赋值到user对象中
+		
+	使用：addUser(@FormBean("user") User user, @FormBean("role") Role role)
+	输入：http://localhost:8080user?user.id=111&user.name=AAA&user.type=type1&role.id=222&role.name=BBB
+	输出：User [id=111, name=AAA, type=type1]  Role [id=222, name=BBB]
