@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.yjy.security.domain.Permission;
 import com.yjy.security.domain.Role;
 import com.yjy.security.domain.User;
+import com.yjy.security.service.RoleService;
 import com.yjy.security.service.UserService;
 
 public class ShiroRealm extends AuthorizingRealm {
@@ -27,6 +28,8 @@ public class ShiroRealm extends AuthorizingRealm {
 	
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private RoleService roleService;
 
 	//注：这个方法会多次被调用，主要加入缓存
 	@Override
@@ -36,15 +39,20 @@ public class ShiroRealm extends AuthorizingRealm {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		
 		String username = (String) principalCollection.getPrimaryPrincipal();
-		User user = userService.findByUsername(username);
 		
-		//赋予角色
-		for(Role role : user.getRoles()) {
-			info.addRole(role.getName());
-			List<Permission> permissions = role.getPermissions();
-			//赋予权限
-			for (Permission permission : permissions) {
-				info.addStringPermission(permission.getCode());
+		if ("admin".equals(username)) { //管理员用户，拥有所有角色和权限
+			info.addRoles(roleService.queryAllRoleName());
+			info.addStringPermission("*");
+		} else { //普通用户
+			//赋予角色
+			User user = userService.findByUsername(username);
+			for(Role role : user.getRoles()) {
+				info.addRole(role.getName());
+				List<Permission> permissions = role.getPermissions();
+				//赋予权限
+				for (Permission permission : permissions) {
+					info.addStringPermission(permission.getCode());
+				}
 			}
 		}
 		return info;
