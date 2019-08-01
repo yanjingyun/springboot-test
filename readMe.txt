@@ -84,13 +84,13 @@ springboot-test7： 测试shiro整合
 	--项目来源于springboot-test6，新整合了密码加密(CredentialsMatcher)、记住我(RememberMeManager)、自定义filter
 	配置admin账号拥有所有角色及权限。
 	--后续整合部分：1、会话管理器SessionManager，用于处理集群的session共享问题（使用redis） 2、缓存管理器CacheManager（使用redis）
-
+		重写SessionManager时，需要注意retrieveSession方法会执行多少次。
 
 
 
 springboot-test8： 测试redis整合
 	1、测试使用redisTemplate。详情查看UserTest和ListUserTest两个类
-	2、使用springCache缓存注解，注入具体缓存方案是redis。测试详情查看UserController类（目前使用注解存入redis的数据不是json格式）
+	2、使用springCache缓存注解，注入具体缓存方案是redis。测试详情查看UserController类
 
 springboot-test9: 测试springCache缓存注解
 	测试springCache的@Cacheable、@CachePut、@CacheEvict注解
