@@ -90,7 +90,7 @@ springboot-test7： 测试shiro整合
 
 springboot-test8： 测试redis整合
 	1、测试使用redisTemplate。详情查看UserTest和ListUserTest两个类
-	2、使用springCache缓存注解，注入具体缓存方案是redis。测试详情查看UserController类
+	2、使用springCache缓存注解，注入具体缓存方案是redis。测试详情查看UserController类。目前设置有效时间为10秒，可设置从配置文件写入
 
 springboot-test9: 测试springCache缓存注解
 	测试springCache的@Cacheable、@CachePut、@CacheEvict注解

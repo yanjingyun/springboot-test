@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="simple-shiro-test/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test1/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test10/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test11/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test12-part1/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test12-part2/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test2/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test3/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test4/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test5/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test6/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test7/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test8/src/main/java"/>
+	<classpathentry kind="src" path="springboot-test9/src/main/java"/>
+	<classpathentry kind="output" path="simple-shiro-test/target/classes"/>
+</classpath>
