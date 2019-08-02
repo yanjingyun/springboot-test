@@ -38,6 +38,17 @@ shiro的三个核心类：
 表单过滤器(FormAuthenticationFilter)
 
 
+权限注解：
+	--开启springAOP注解：配置DefaultAdvisorAutoProxyCreator和AuthorizationAttributeSourceAdvisor两个bean即可
+	@RequiresAuthentication	--表示当前Subject已经通过login进行身份验证，即Subject.isAuthenticated()返回true
+	@RequiresUser			--表示当权Subject已经身份验证或通过记住我登录
+	@RequiresRoles("role1")	--表示需要role1角色
+	@RequiresRoles(value = {"role1", "role2"}, logical = Logical.OR)	--表示需要role1或role2角色
+	@RequiresPermissions("/permission1")	--表示需要permission1权限
+	@RequiresPermissions(value = {"permission1", "permission2"}, logical = Logical.OR)	--表示需要permission1或permission2权限
+
+
+
 
 1.认证、授权、realm
 Shiro认证流程：

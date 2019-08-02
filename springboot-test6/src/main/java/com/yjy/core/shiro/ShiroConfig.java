@@ -82,8 +82,11 @@ public class ShiroConfig {
 
 	
 	/**
-     * DefaultAdvisorAutoProxyCreator，Spring的一个bean，由Advisor决定对哪些类的方法进行AOP代理。
-     */
+	 * 开启AOP注解
+	 * 开启后能使用@RequiresRoles、@RequiresPermissions等注解
+	 * 配置DefaultAdvisorAutoProxyCreator和AuthorizationAttributeSourceAdvisor两个bean即可
+	 * <br>Enable Shiro Annotations for Spring-configured beans. Only run after the lifecycleBeanProcessor has run
+	 */
     @Bean
     @ConditionalOnMissingBean
     public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
@@ -92,10 +95,6 @@ public class ShiroConfig {
         return defaultAAP;
     }
 
-    /**
-     * AuthorizationAttributeSourceAdvisor，shiro里实现的Advisor类，
-     * 内部使用AopAllianceAnnotationsAuthorizingMethodInterceptor来拦截用以下注解的方法。
-     */
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
         AuthorizationAttributeSourceAdvisor aASA = new AuthorizationAttributeSourceAdvisor();
