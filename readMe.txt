@@ -114,8 +114,14 @@ springboot-test10： 测试传多个参数情况
 
 
 springboot-test11： 测试jpa添加基础字段
-	主键类(IdEntity)、乐观锁(VersionEntity)
-	AuditEntity类：使用@CreatedDate、@CreatedBy、@LastModifiedDate、@LastModifiedBy自动生成时间和修改者
+	数据库基础字段：
+		主键Id	--IdEntity类
+		乐观锁	--VersionEntity类
+		创建时间/创建用户/最后更新时间/最后更新用户	--AuditEntity类
+			@CreateDate、@CreateBy、@LastModifiedDate、@LastModifiedBy四个注解
+			创建用户字段自动赋值需要实现AuditorAware接口
+			@EntityListeners(AuditingListener.class) 和 @EnableJpaAuditing 注解
+			问题：怎么添加预留字段自动赋值，比如创建机构/最后更新机构等字段？
 	ApplicationUtils类：获取ApplicationContext和bean方法
 
 

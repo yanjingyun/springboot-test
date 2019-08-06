@@ -32,6 +32,24 @@ public class UserTest {
 		user.setName("testUpd");
 		userDao.save(user);
 	}
+
+	/**
+	 * 测试乐观锁
+	 * 连续保存两次同一条记录会抛异常
+	 * optimistic locking failed; nested exception is org.hibernate.StaleObjectStateException: Row was updated or deleted by another transaction (or unsaved-value mapping was incorrect) 
+	 */
+	@Test
+	public void testVersionUpdate() {
+		String id = "297ea8576c4287f2016c4287fbbc0000";
+		User user = userDao.findById(id).get();
+		User user2 = userDao.findById(id).get();
+		
+		user.setName("testUpd11");
+		userDao.save(user);
+
+		user2.setName("testUpd22");
+		userDao.save(user2);
+	}
 	
 	@Test
 	public void testApplicationContext() {

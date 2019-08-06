@@ -48,6 +48,8 @@ shiro的三个核心类：
 	@RequiresPermissions(value = {"permission1", "permission2"}, logical = Logical.OR)	--表示需要permission1或permission2权限
 
 
+统一异常处理：
+	针对普通请求和ajax异步请求的异常进行处理
 
 
 1.认证、授权、realm
