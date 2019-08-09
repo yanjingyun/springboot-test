@@ -130,3 +130,8 @@ springboot-test12-part1 && springboot-test12-part2 测试RestTemplate的使用
 	有时候项目中要建立多个微服务，或者把一个大的项目拆分成多个微服务进行解耦，为了方便完成各个微服务之间进行互相调用，Spring封装了http请求模板类RestTemplate
 
 springboot-test13： 测试生成日志文件
+
+
+springboot-test14： 测试thymeleaf模板的高级特性
+	1.公共模块引入 --> 替换原来jsp的taglib引入
+	2.页面调用Java的静态变量和静态方法

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>主页</title>
+</head>
+<body>
+	<!-- 头部引入 -->
+	<div th:insert="common/header"></div>
+	
+	<!-- 测试调用Java静态变量/静态方法 -->
+	<th:block th:text="${T(com.yjy.core.utils.CodeName).PRE_TEST_CODE}"></th:block>
+	<th:block th:text="${T(com.yjy.core.utils.CodeName).getName('GENDER', '0')}"></th:block>
+	
+	<!-- 底部引入 -->
+	<div th:insert="common/footer"></div>
+</body>
+</html>
