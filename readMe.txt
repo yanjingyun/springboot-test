@@ -135,3 +135,7 @@ springboot-test13： 测试生成日志文件
 springboot-test14： 测试thymeleaf模板的高级特性
 	1.公共模块引入 --> 替换原来jsp的taglib引入
 	2.页面调用Java的静态变量和静态方法
+
+
+springboot-test15： 测试jpa封装QueryVo！！！
+	直接在Vo类生成Specification类，因此不用在service层写。QueryVo参数条件通过@Filter动态织入。详情查询Controller层方法

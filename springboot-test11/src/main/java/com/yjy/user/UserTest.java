@@ -12,6 +12,9 @@ import com.yjy.core.utils.ApplicationUtils;
 import com.yjy.user.dao.UserDao;
 import com.yjy.user.domain.User;
 
+/**
+ * 测试Id、versionNumber、createTime等是否保存成功
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserTest {
