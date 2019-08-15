@@ -139,3 +139,7 @@ springboot-test14： 测试thymeleaf模板的高级特性
 
 springboot-test15： 测试jpa封装QueryVo！！！
 	直接在Vo类生成Specification类，因此不用在service层写。QueryVo参数条件通过@Filter动态织入。详情查询Controller层方法
+
+springboot-test16： 测试表单提交后相关操作
+	1、表单提交成功：弹出提示语、并关闭当前页面
+	2、表单提交成功：弹出提示语、并关闭当前页面和刷新父页面

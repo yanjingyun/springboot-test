@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>list页面</title>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/common-util.js"></script>
+	<script type="text/javascript">
+		$(function() {
+		})
+	</script>
+</head>
+<body>
+<table>
+	<tr>
+		<th>姓名</th>
+		<th>出生日期</th>
+		<th>编辑</th>
+	</tr>
+	<tr th:each="user : ${users}">
+		<td th:text="${user.name}">姓名</td>
+		<td th:text="${user.birthday}">出生日期</td>
+		<td>
+			<a th:href="@{'/form?name='+${user.name}}" target="_blank">编辑</a>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

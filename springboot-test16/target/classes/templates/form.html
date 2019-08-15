@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>form页面</title>
+</head>
+<body>
+<form action="/form/save-and-close">
+	姓名：<input type="text" name="name" th:value="${user.name}"><br>
+	生日：<input type="text" name="birthday" th:value="${user.birthday}"><br>
+	<button type="submit">保存并关闭</button><br>
+</form>
+
+<form action="/form/save-and-refresh">
+	姓名：<input type="text" name="name" th:value="${user.name}"><br>
+	生日：<input type="text" name="birthday" th:value="${user.birthday}"><br>
+	<button type="submit">保存并刷新</button><br>
+</form>
+</body>
+</html>
