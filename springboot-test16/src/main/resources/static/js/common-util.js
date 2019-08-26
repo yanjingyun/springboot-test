@@ -28,5 +28,6 @@ function closeWindow() {// 兼容iframe中的关闭按钮
 	window.top.close();
 }
 function refreshCurrentPage() { //刷新当前页面（这里表单不知道会不会有问题）
+	// TODO 分页页面刷新需要将pageNumber改为0
 	window.location.reload();
 }

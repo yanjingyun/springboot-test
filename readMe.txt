@@ -122,6 +122,8 @@ springboot-test11： 测试jpa添加基础字段
 			创建用户字段自动赋值需要实现AuditorAware接口
 			@EntityListeners(AuditingListener.class) 和 @EnableJpaAuditing 注解
 			问题：怎么添加预留字段自动赋值，比如创建机构/最后更新机构等字段？
+		附：这些创建机构/最后更新机构预留字段可用其它方式实现
+			@PrePersist/@PreRemove/@PostPersist/@PostRemove/@PreUpdate/@PostUpdate/@PostLoad 注解
 	ApplicationUtils类：获取ApplicationContext和bean方法
 
 
@@ -143,3 +145,12 @@ springboot-test15： 测试jpa封装QueryVo！！！
 springboot-test16： 测试表单提交后相关操作
 	1、表单提交成功：弹出提示语、并关闭当前页面
 	2、表单提交成功：弹出提示语、并关闭当前页面和刷新父页面
+
+
+springboot-test17： 测试使用druid数据库连接池
+	数据库连接池选择：1）HikariCP是springboot的默认连接池，目前性能最好 2）Druid包括很多维度的统计h和分析功能
+	参考文章：https://blog.csdn.net/justlpf/article/details/80728529
+	官方文档：https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+
+
+

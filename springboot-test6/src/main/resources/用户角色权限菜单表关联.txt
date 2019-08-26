@@ -1,0 +1,142 @@
+用户角色权限菜单表关联：
+-1）用户表：
+@Entity
+@Table(name = "sec_user")
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue
+	private Integer id;
+
+	//账号
+	@Column(unique = true)
+	private String username;
+	
+	//真实名字
+	private String realName;
+	
+	//密码
+	private String password;
+	
+	//加密密码的盐
+	private String salt;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "SEC_USER_ROLE", joinColumns = {
+			@JoinColumn(name = "USER_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID") })
+	private List<Role> roles = new ArrayList<Role>();
+	...
+}
+
+-2）角色表
+@Entity
+@Table(name = "sec_role")
+public class Role implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	public static final String ADMIN_ROLE = "admin";
+
+	@Id
+	@GeneratedValue
+	private Integer id;
+
+	//角色名
+	@Column(unique = true)
+	private String name;
+	
+	//备注
+	private String remark;
+
+	@ManyToMany(mappedBy = "roles")
+	private List<User> users = new ArrayList<User>();
+	
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "SEC_ROLE_MODULE", joinColumns = {
+			@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "MODULE_ID", referencedColumnName = "ID") })
+	private List<Module> modules = new ArrayList<Module>();
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "SEC_ROLE_PERMISSION", joinColumns = {
+			@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID") })
+	private List<Permission> permissions = new ArrayList<Permission>();
+	...
+}
+
+-3）权限表
+@Entity
+@Table(name = "sec_permission")
+public class Permission implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue
+	private Integer id;
+
+	//权限名称
+	private String name;
+
+	//权限编码
+	private String code;
+
+	@ManyToMany(mappedBy = "permissions")
+	private List<Role> roles = new ArrayList<Role>();
+	...
+}
+
+-4）菜单表
+@Entity
+@Table(name = "sec_module")
+public class Module implements Serializable {
+
+	private static final long serialVersionUID = 2516570620810479963L;
+	
+	public static final Comparator<Module> comparator = new Comparator<Module>() {
+
+		@Override
+		public int compare(Module m1, Module m2) {
+			return m1.getTreePath().compareTo(m2.getTreePath());
+		}
+	};
+	
+	@Id
+	@GeneratedValue
+	private Integer id;
+	
+	/**
+	 * 模块名称
+	 */
+	private String name;
+	
+	/**
+	 * 菜单URL
+	 */
+	private String menuUrl;
+
+	/**
+	 * 树编码，3位一层
+	 * 一级菜单（001）
+	 * 二级菜单（001001）
+	 * 三级菜单（001001001）
+	 */
+	private String treePath;
+	
+	// 父模块
+	@Transient
+	private Module parent;
+	
+	// 下一级模块
+	@Transient
+	private Set<Module> children = new TreeSet<Module>(comparator);
+	
+	@ManyToMany(mappedBy = "modules")
+	private List<Role> roles = new ArrayList<Role>();
+	...
+}
