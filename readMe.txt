@@ -153,4 +153,11 @@ springboot-test17： 测试使用druid数据库连接池
 	官方文档：https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
 
 
-
+springboot-test18-part1 & springboot-test18-part2 ： 测试spring session共享(redis缓存)
+	参考：
+		https://www.cnblogs.com/SimpleWu/p/10118674.html
+		--补充：可使用nginx配置负载均衡，通过请求同一地址进到不同的应用程序中，查看返回数据（未完成）
+	测试如下：
+	http://localhost:8080/addSession?username=admin //当前端口号：8080 当前sessionId:17973600-84e1-457b-84ba-9adcc6ab3b67 存入Session的值：admin
+	http://localhost:8080/getSession //当前端口号：8080 当前sessionId:17973600-84e1-457b-84ba-9adcc6ab3b67 获取用户名：admin
+	http://localhost:8081/getSession //当前端口号：8081 当前sessionId:17973600-84e1-457b-84ba-9adcc6ab3b67 获取用户名：admin
