@@ -4,10 +4,12 @@ import java.sql.Date;
 
 import com.yjy.core.annotation.Filter;
 import com.yjy.core.annotation.Filter.OperatorEnum;
-import com.yjy.core.vo.AbstractQueryVo;
+import com.yjy.core.vo.query.AbstractQueryVo;
 import com.yjy.test1.user.domain.User;
 
 public class UserQueryVo extends AbstractQueryVo<User> {
+
+	private static final long serialVersionUID = 3537083039120463058L;
 
 	@Filter(operator = OperatorEnum.LIKE_ALL)
 	private String name;

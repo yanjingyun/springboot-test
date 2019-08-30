@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yjy.test1.user.domain.User;
 import com.yjy.test1.user.service.UserService;
 import com.yjy.test1.user.vo.UserQueryVo;
+import com.yjy.test1.user.vo.UserSaveVo;
 
 @RestController
 @RequestMapping("/user")
@@ -39,5 +40,11 @@ public class UserController {
 	@RequestMapping("page")
 	public Page<User> getPage(UserQueryVo vo) {
 		return userService.getPage(vo);
+	}
+	
+	// 测试：只修改name值不能修改birthday值
+	@RequestMapping("save")
+	public User saveUser(UserSaveVo vo) {
+		return userService.save(vo.getEntity());
 	}
 }

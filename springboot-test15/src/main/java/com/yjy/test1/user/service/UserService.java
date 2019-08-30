@@ -42,4 +42,8 @@ public class UserService {
 	public Page<User> getPage(UserQueryVo vo) {
 		return userDao.findAll(vo.getSpecification(), vo.getPageable());
 	}
+
+	public User save(User entity) {
+		return userDao.save(entity);
+	}
 }

@@ -139,8 +139,12 @@ springboot-test14： 测试thymeleaf模板的高级特性
 	2.页面调用Java的静态变量和静态方法
 
 
-springboot-test15： 测试jpa封装QueryVo！！！
-	直接在Vo类生成Specification类，因此不用在service层写。QueryVo参数条件通过@Filter动态织入。详情查询Controller层方法
+springboot-test15： 测试jpa封装QueryVo和SaveVo！！！
+	封装成Vo的作用：仅接收需要操作的字段，防止在前端传入其它非操作字段。
+	1.QueryVo
+		直接在Vo类生成Specification类，因此不用在service层写。QueryVo参数条件通过@Filter动态织入。详情查询Controller层方法
+	2、SaveVo
+		在Vo类接收仅需要修改的字段，不需要修改的字段不会更新。详情查看UserController的save()方法
 
 springboot-test16： 测试表单提交后相关操作
 	1、表单提交成功：弹出提示语、并关闭当前页面
@@ -148,7 +152,11 @@ springboot-test16： 测试表单提交后相关操作
 
 
 springboot-test17： 测试使用druid数据库连接池
-	数据库连接池选择：1）HikariCP是springboot的默认连接池，目前性能最好 2）Druid包括很多维度的统计h和分析功能
+	数据库连接池选择：
+		性能方面：HikariCP > Druid > Tomcat-jdbc > Dbcp > C3p0
+		1）HikariCP是springboot的默认连接池，目前性能最好。hikariCP的高性能得益于最大限度的避免锁竞争
+		2）Druid功能最全面，sql拦截、统计数据等，具有良好的扩展性。
+		开启prepareStatement缓存，即PSCache，对性能会有大概20%的提升
 	参考文章：https://blog.csdn.net/justlpf/article/details/80728529
 	官方文档：https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
 

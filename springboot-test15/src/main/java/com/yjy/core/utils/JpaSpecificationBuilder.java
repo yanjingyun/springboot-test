@@ -19,12 +19,12 @@ import org.springframework.util.StringUtils;
 
 import com.yjy.core.annotation.Filter;
 import com.yjy.core.annotation.Filter.OperatorEnum;
-import com.yjy.core.vo.AbstractQueryVo;
+import com.yjy.core.vo.query.AbstractQueryVo;
 
 /**
  * 生成Specification
  */
-public class SpecificationBuilder {
+public class JpaSpecificationBuilder {
 
 	public static <T> Specification<T> create(AbstractQueryVo<T> queryVo) {
 		return new Specification<T>() {
