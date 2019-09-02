@@ -169,3 +169,23 @@ springboot-test18-part1 & springboot-test18-part2 ： 测试spring session共享
 	http://localhost:8080/addSession?username=admin //当前端口号：8080 当前sessionId:17973600-84e1-457b-84ba-9adcc6ab3b67 存入Session的值：admin
 	http://localhost:8080/getSession //当前端口号：8080 当前sessionId:17973600-84e1-457b-84ba-9adcc6ab3b67 获取用户名：admin
 	http://localhost:8081/getSession //当前端口号：8081 当前sessionId:17973600-84e1-457b-84ba-9adcc6ab3b67 获取用户名：admin
+
+
+springboot-test20： 测试jwt使用
+	jwt工具类(JwtUtils)：生成token、解析token
+	token生成：String token = HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret);
+	/login --输入username&password，验证通过后返回生成token，在前端本地保存token
+	校验jwt拦截器：
+		/hello1	--忽略jwt拦截器
+		/hello2	--测试jwt拦截器，在header中添加token属性
+
+
+
+
+
+
+
+
+
+
+
