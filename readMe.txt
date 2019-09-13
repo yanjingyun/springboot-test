@@ -171,6 +171,21 @@ springboot-test18-part1 & springboot-test18-part2 ： 测试spring session共享
 	http://localhost:8081/getSession //当前端口号：8081 当前sessionId:17973600-84e1-457b-84ba-9adcc6ab3b67 获取用户名：admin
 
 
+springboot-test19： 测试jdbcTemplate和NamedParameterJdbcTemplate的使用
+	
+	--1.jdbcTemplate测试
+		update() --执行insert、update、delete语句。参数可写成:new Object[] {"testAA", 2}
+		batchUpdate() --执行批量写操作语句。
+		queryForObject() --1、单列结果查询 2、封装成对象RowMapper<User>
+		query()	--执行批量读操作语句
+	--2.NamedParameterJdbcTemplate测试
+		namedParameterJdbcTemplate.update(sql, paramMap);
+	配置springboot默认日志：
+		# logging.level.root=info
+		logging.file=./logs/log.log
+		logging.pattern.file=%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n
+
+
 springboot-test20： 测试jwt使用
 	jwt工具类(JwtUtils)：生成token、解析token
 	token生成：String token = HMACSHA256(base64UrlEncode(header) + "." + base64UrlEncode(payload), secret);
