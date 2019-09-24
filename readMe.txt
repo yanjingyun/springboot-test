@@ -172,7 +172,7 @@ springboot-test18-part1 & springboot-test18-part2 ： 测试spring session共享
 
 
 springboot-test19： 测试jdbcTemplate和NamedParameterJdbcTemplate的使用
-	
+	--适用于仅执行几个字段的写操作、读操作。高效批量、高效更新
 	--1.jdbcTemplate测试
 		update() --执行insert、update、delete语句。参数可写成:new Object[] {"testAA", 2}
 		batchUpdate() --执行批量写操作语句。
@@ -194,6 +194,15 @@ springboot-test20： 测试jwt使用
 		/hello1	--忽略jwt拦截器
 		/hello2	--测试jwt拦截器，在header中添加token属性
 
+
+springboot-test21： 测试前端传参实体与数据库实体结合
+	--该项目引入了commons-beanutils包
+	--模拟从前端传入部分字段，从数据库获取部分字段，将上面两个结合后得到新实体，jpa再保存该新实体。
+	前言：我们数据库的字段可能很多，但是前端页面能修改的字段可能就几个，jpa的保存机制直接保存整个实体，因此需要保存的应是将前端实体和后端实体结合后得到的实体。如：用户表有用户名、密码、出生日期，但前端仅允许修改用户名、出生日期，因此在保存时将前端传过来的用户名、出生日期，与数据库得到的密码结合，得到新的实体，再保存该新实体。
+	--测试详情参考UserController类
+	作用：
+		1、保证恶意修改其它不必要的字段。保证前端仅能修改的是用户名和出生日期，密码从前端传入无效。
+		--附：若仅更新几个字段，可以使用jdbcTemplate进行更新，但这样不能保证jpa的乐观锁是否一致。
 
 
 
