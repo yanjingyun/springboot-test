@@ -9,6 +9,7 @@ springboot-test1： 测试spring4的泛型注入
 springboot-test2： 测试SpringDataJpa使用
 	主要为复杂查询方法的使用，详情参考“jpa查询方法.txt”文档
 	1、Specification查询，返回实体、列表、分页
+		添加exists子查询测试，详见CustomerTest类（注意一对多映射写法）
 	2、entityManager的原生sql查询，返回实体、列表、分页
 	3、@Version乐观锁使用
 
@@ -202,6 +203,7 @@ springboot-test21： 测试前端传参实体与数据库实体结合
 	--测试详情参考UserController类
 	作用：
 		1、保证恶意修改其它不必要的字段。保证前端仅能修改的是用户名和出生日期，密码从前端传入无效。
+		2、部分字段为公共字段，如id、versionNumber、createUser、createTime、lastUpdateUser、lastUpdateTime等，公共字段会抽象成一个类，具体数据库实体继承这些类，从而添加了这些公共字段。在set属性时需要对这一部分字段的赋值。
 		--附：若仅更新几个字段，可以使用jdbcTemplate进行更新，但这样不能保证jpa的乐观锁是否一致。
 
 
