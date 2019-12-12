@@ -207,10 +207,23 @@ springboot-test21： 测试前端传参实体与数据库实体结合
 		--附：若仅更新几个字段，可以使用jdbcTemplate进行更新，但这样不能保证jpa的乐观锁是否一致。
 
 
+springboot-test22： 测试WebSocket，向前端推送消息
+	测试：
+		--1.两个客户端连接
+		http://localhost:8080/websocket/socket/20
+		http://localhost:8080/websocket/socket/21
+
+		--2.群发推送消息
+		http://localhost:8080/websocket/socket/push?message=测试群发推送
+		--3.推送给某人
+		http://localhost:8080/websocket/socket/push/21?message=推送给21客户
+		--4.客户端发送消息
+		浏览器Console中输入:ws.send("测试客户端20");
 
 
-
-
+springboot-test23: 测试定时任务
+	@EnableScheduling开启任务调度，@Scheduled创建定时任务。
+	注：这些任务都是使用同一线程。
 
 
 

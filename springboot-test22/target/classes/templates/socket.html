@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<title>WebSocket测试</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<h2>来自服务端消息：</h2>
+<div id="showServerMsgId"></div>
+</body>
+<script type="text/javascript" th:inline="javascript">
+	if (typeof (WebSocket) == "undefined") {
+		alert("您的浏览器不支持WebSocket");
+	}
+	
+	var cid = [[${cid}]];
+	
+	// 创建WebSocket对象
+	var ws = new WebSocket("ws://localhost:8080/websocket/" + cid);
+	// 1、连接成功时触发
+	ws.onopen = function() {
+		$("#showServerMsgId").append("Socket 已打开<br>");
+		ws.send("客户端" + cid + "测试发送消息"); //客户端发送消息
+	};
+	
+	// 2、客户端接收服务端数据时触发  
+	ws.onmessage = function(e) {
+		console.log(e);
+		//发现消息进入    开始处理前端触发逻辑
+		$("#showServerMsgId").append(e.data);
+		//ws.send("客户端发送消息！！");
+	};
+	// 3、连接关闭时触发  
+	socket.onclose = function() {
+		console.log("Socket已关闭");
+	};
+	// 4、通信发生错误时触发  
+	ws.onerror = function() {
+		alert("Socket发生了错误");
+		//此时可以尝试刷新页面
+	}
+</script>
+</html>
