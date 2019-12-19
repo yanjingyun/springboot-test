@@ -1,0 +1,271 @@
+SpringBoot运行流程：
+	https://www.cnblogs.com/panxuejun/p/7132088.html	--看不懂
+
+
+@SpringBootApplication
+	用在Spring Boot 主类上，用来开启Spring Boot的各项能力。
+	由三个注解组成：@Configuration、@ComponentScan、@EnableAutoConfiguration
+
+@EnableAutoConfiguration
+	--概括就是，借助@Import支持，将所有符合自动配置条件的bean定义加载到IoC容器。
+	Spring框架提供的各种名字为@Enable开头的注解，如@EnableScheduling、@EnableCaching、@EnableAsync等。
+
+@Configuration
+	最初Spring使用xml配置文件来描述bean的定义及相关依赖关系，从而生成大量xml文件。
+	它是IOC容器的JavaConfig形式配置类注解。比以前的xml配置好。
+	以前配置方式有两种：1）基于xml配置 2）基于JavaConfig配置
+	--实例：
+	@Configuration
+	public class BookConfiguration {
+		@Bean
+		public BookService bookService(UserService userService) {
+			return new BookService(userService); //引入userService依赖
+			// return new BookService(userService()); //引入userService依赖的第二种方法
+			// 注：多次调用userService()方法时，得到的UserService实例仅有一个。			
+		}
+
+		@Bean
+		public UserService userService() {
+			return new UserService();
+		}
+	}
+	--实例2：
+	@Configuration
+	public class MyConfig() {
+		@Bean
+		public MyService myService() {
+			return new MyService(myDao());
+		}
+
+		@Bean
+		public MyDao myDao() {
+			return new MyDao();
+		}
+	}
+
+@Bean
+	任何标记了@Bean的方法，其返回值将作为一个bean注册到Spring的IOC容器中，方法名默认成为该Bean定义的id
+
+@EnableAutoConfiguration
+	1、它是实现自动配置的入口，该注解又通过@Import注解导入AutoConfigurationImportSelector类，AutoConfigurationImportSelector类加载了META-INF/spring.factories的配置信息。然后筛选出以EnableAutoConfiguration为key的数据，加载到IOC容器中。该注解开启了springboot强大的自动配置功能。
+	2、它将所有符合条件的@Configuration配置都加载到当前SpringBoot创建并使用的IoC容器；
+	3、关键点@Import(EnableAutoConfigurationImportSelector.class)
+
+
+@ComponentScan
+	相当于xml文件的<comtext:component-scan>元素。
+	表示启用组件扫描，Spring会自动扫描所有通过注解配置的bean，然后将其注册到ioc容器中。可通过basePackages属性来指定扫描范围，默认从声明@Component所在类的package进行扫描。
+
+@Import
+	该注解用于导入另一个配置类。
+	可同时引入多个配置类，如：@Import({A.class, B.class})
+	--实例：
+	@Configuration
+	public class UserConfiguration {
+		@Bean
+		public UserService userService() {
+			return new UserService();
+		}
+	}
+
+	@Import(UserConfiguration.class) //引入User配置类
+	@Configuration
+	public class BookConfiguration {
+		@Bean
+		public BookService bookService(UserService userService) {
+			return new BookService(userService);
+		}
+	}
+
+
+注入配置文件属性：
+@ConfigurationProperties && @Value 区别？
+	@Value("${mysql.url}") //直接注入属性
+	@ConfigurationProperties(prefix="author", locations={"classpath:author.properties"}) //通过prefix指定前缀，通过locations指定位置
+	
+	--实例：
+	@Vakue("${redis.host}")
+	String host;
+
+	@Bean
+	@ConfigurationProperties(prefix = "spring.datasource.druid.sys")
+	public DataSource sysDateSource() {
+		return DruidDataSourceBuilder.create().build();
+	}	
+@ConfigurationProperties 注解：
+	使用：在类、有@Bean注解的方法上声明
+	-1）配置文件(application.properties)
+		wxminiapp.config.appid=wxddf44695a847e2ff
+	-2）使用一：用在实体上
+		@ConfigurationProperties(prefix = "wxminiapp.config")
+		public class WxProperties { private String appid; }
+	-3）配置类(WxMaConfiguration.class)
+		@Configuration
+		@EnableConfigurationProperties(WxMaProperties.class)
+		public class WxMaConfiguration {
+			
+			private WxMaProperties properties;
+
+			@Autowired
+			public WxMaConfiguration(WxMaProperties properties) {
+				this.properties = properties;
+			}
+		}
+	--使用二：用在@Bean注解上
+		@Bean
+		@ConfigurationProperties(prefix = "wxminiapp.config")
+		public WxProperties wxProperties() {
+			return new WxProperties();
+		}
+
+
+
+多线程：
+	@EnableAsync开启对异步任务的支持，并通过在实际执行bean方法中使用@Async注解来声明一个异步任务
+计划任务：
+	@EnableScheduline来开启对计划任务的支持，然后再要执行的任务上加注解@Scheduled
+缓存支持(spring cache)：
+	不同的缓存技术，需要不同的cacheManager
+异步消息：
+	spring 对JMS和AMQP的支持分别来自于spring-jms 和spring-rabbit
+	ConnectionFactory来实现连接消息代理，并分别提供了JmsTemplate、RabbitTemplate。
+	spring为JMS 、AMQP提供了@JmsListener @RabbitListener 注解在方法上监听消息代理发布的消息。我们只需要分别通过@EnableJms @EnableRabbit开启支持
+	注：@EnableScheduling只是开始任务调度，@Scheduled注解是表明这是一个任务调度，但是有多个@Scheduled注解方法时，都是同一线程去执行（打印log时显示）。解决：可在对应任务方法上添加@Async注解，表明这些方法需要异步去执行，并在启动类添加@EnableAsync注解开启异步线程。
+@Enable*注解工作原理： ...!!!
+	@EnableAutoConfiguration是通过@Import收集和注册特定场景相关的bean定义；
+	@EnableScheduling是通过@Import将Spring调度框架相关的bean定义加载到IOC容器中；
+	@EnableMBeanExport是通过@Import将JMX相关的bean定义加载到IoC容器；
+
+
+SpringBoot中的SpringMVC说明：
+--SpringMVC主要配置都可以通过继承WebMvcConfigurerAdapter或WebMvcConfigurationSupport类进行修改，这两个类主要方法有：
+	-1）addFormatters：增加格式化工具（用于接收参数）
+	-2）configureMessageConverters：配置消息转换器（用于@RequestBody和@ResponseBody）
+	-3）addInterceptors：添加拦截器
+
+SpringMVC相关配置：
+--新增配置类，实现实现WebMvcConfigurer接口
+1.配置虚拟路径
+	--用于读取静态资源、及磁盘中的图片、视频、音频等.
+	--新增配置类，实现WebMvcConfigurer接口，并重写addResourceHandlers方法
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/dist/**").addResourceLocations("classpath:/static/dist/");
+		registry.addResourceHandler("/theme/**").addResourceLocations("classpath:/static/theme/");
+		// "file:D:/users/downloads/"是文件真实的存储路径，里面有一张aa.jpg图片
+		registry.addResourceHandler("/download/**").addResourceLocations("file:D:/users/downloads/");
+		super.addResourceHandlers(registry);
+	}
+	访问地址：http://localhost:8080/download/aa.jpg
+
+2.新增拦截器
+	--新增配置类，实现WebMvcConfigurer接口，并重写addInterceptors方法。注：spring2.0+配置拦截器会拦截静态资源访问
+	拦截器相关方法：
+		--为什么preHandle、postHandle？以前的Controller叫处理器Handler
+		-1）preHandle()方法：发生在Controller执行前。true-继续执行，false-终止执行。
+			可以在这里加入登录校验、权限拦截等
+		-2）postHandle()方法：发生在Controller执行后但未返回视图前。
+			可用于对用户数据进一步加工，比如在这里加入公用信息以便页面显示
+		-3）afterCompletion()方法：发生在controller执行且视图返回后。
+			这里可得到执行controller时的异常信息，可用于记录操作日志。
+	--实例：
+	@Bean
+	public JwtInterceptor jwtInterceptor() {
+		return new JwtInterceptor();
+	}
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(jwtInterceptor()).addPathPatterns("/**").excludePathPatterns("/static/**");
+	}
+
+
+静态页面加载：
+	将html文件放在static目录下
+
+JdbcTemplate:
+	简单查询结果映射成Java对象，复杂的结果集通过实现RowMapper接口来映射到Java对象。
+	--如果是仅更新几个字段的update语句可以使用JdbcTemplate！！！
+NamedParameterJdbcTemplate
+	继承JdbcTemplate，JdbcTemplate对SQL中的参数仅支持“?”占位符，NameParameterJdbcTemplate允许使用参数名字作为占位符。
+	MapSqlParameterSource类，针对于key-value风格的参数，key为SQL中的参数。
+	SqlParameterSource类，针对于任意JavaBean，为NameParameterJdbcTemplate提供参数。
+	MapSqlParameterSource类
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes=SpringbootApplication.class)
+
+
+切换多个外部配置文件：
+	--使用spring.profiles.active 属性：项目可能存在开发环境、测试环境和生产环境，因此可以使用spring.profile.active进行切换
+	--1）根据运行环境自动读取不同的配置文件读取不同的配置文件
+	application.proerties：
+		spring.profiles.active=dev #指定环境，也可以为prod
+	application-dev.properties：开发环境
+		server.port=8081
+	application-test.properties：测试环境
+		server.port=8082
+	application-prod.properties：生产环境
+		server.port=8081
+	--2）测试不同配置的加载：
+		java -jar xxx.jar #加载默认环境(dev)
+		java -jar xxx.jar --spring.profiles.active=test #加载测试环境，即端口号为8082
+		java -jar xxx.jar --spring.profiles.active=prod #加载生产环境，即端口号为8083
+	--3）另
+		1、通过maven命令“run as -> maven install”将项目打包成jar文件，文件在maven仓库repository中。
+		2、使用java命令指定配置文件：java –jar springboot02-0.0.1-SHAPSHOT.jar –spring.profiles.active=dev
+
+
+
+
+AOP注解：
+	@Component
+	@Aspect
+	@Order(1) //值越小，优先级越高
+	@Pointcut声明切面
+
+	JoinPoint //目标类连接点对象，包括入参、签名对象、目标对象、代理对象
+	ProceedingJoinPoint //继承了JoinPoint接口
+
+
+springboot默认日志系统：
+	详情：https://www.cnblogs.com/bigdataZJ/p/springboot-log.html
+	springboot默认使用LogBack日志系统，默认将日志打印到控制台上，可换成Log4j2等，
+	可添加依赖spring-boot-starter-logging引入日志系统。springboot项目一般都会引入spring-boot-starter或spring-boot-starter-web，这两个起步依赖包含了spring-boot-starter-logging依赖。
+	使用：private static final Logger LOG = LoggerFactory.getLogger(XXX.class);
+	添加配置：
+		logging.level.root=info
+		logging.file=./logs/log.log
+		logging.pattern.file=%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger- %msg%n
+
+
+RestTemplate使用
+
+
+
+异步编程：
+	@EnableAsync和@Async注解
+	SpringMVC用于同步处理，SpringWebflux用于异步处理。
+	springboot2.0有两条线：
+		1、Spring Web Mvc -> Spring Data
+		2、Spring WebFlux -> Spring Data Reactive
+		若使用SpringDataReactive，原来的Spring针对SpringData（JDBC等）的事务管理会不起作用。原来的Spring事务管理都是基于ThreadLocal传递事务的，其本质是基于阻塞IO模型，不是异步
+
+
+Spring5 WebFlux
+	游戏、视频、新闻和广告的网站，他们一般不会涉及账户和财产问题，也就是不需要很高的数据一致性，但对并发数和响应速度却十分在意。
+	传统编程中的模型：
+		请求->请求队列->分发器->处理线程
+		缺点：当处理线程不能及时响应用户时，大量的线程只能在请求队列中等待或者被抛弃
+	响应式模型：
+		响应式编程分为：RouterFuncations，SpringWebFlux，HTTP/Reactive Stream三层。
+		1、RouterFuncations是一个路由分发层，根据请求的事件，决定采用什么类的什么方法处理处理客户端发送过来的请求,它就是selector的作用
+		2、SpringWebFlux是控制层，只要处理业务逻辑前进行封装的封装和控制数据流返回格式
+		3、HTTP/Reactive Stream是将结果转换为数据流的过程。
+
+		SpringWebFlux还提供了比RestTemplate更为强大的类WebClient,可以使用Flux，Mono等
+
+
+
+
+

@@ -1,0 +1,57 @@
+
+概述：
+	Spring3.1引入了基于注解的缓存技术，它本质上不是一个具体的缓存实现方案（如EhCache、redis、mencached等），而是一个对缓存使用的抽象！
+	
+	SpringCache提供了一个CacheManager接口，用于抽象和管理缓存；提供Cache接口来实现具体缓存方案（如EhCache、redis等）；而业务数据的CRUD操作，则由@Cacheable/@CachePut/@CacheEviet注解来进行配置后，由Cache接口下的各种实现类来处理。
+
+	SpringCache不提供失效时间相关配置：因为并不是所有的具体缓存实现都支持设置失效时间的。
+
+
+缓存管理器CacheManager
+	两个形式引入CacheManager：
+		-1）xml配置：需要加入<cache:annotation-driven />和CacheManager的Bean
+		-2）在配置类注解引入：需添加@EnableCaching和CacheManager的Bean
+
+
+SpringCache注解说明：
+	--详情查看org.springframework.cache.annotation包。
+	前提：@EnableCaching	--开启缓存（在启动类或配置类添加）。这样才能使用底下的注解
+-1）@Cacheable
+	--缓存查询。先从缓存中查询有无数据，有则直接返回，无则执行方法并将返回值存入缓存。适用于读数据
+	主要属性：value/cacheName、key、condition/unless
+		value/cacheName：缓存名称，表明使用哪个具体缓存方案
+		key：该缓存下的唯一标识key，可使用SpEL语法
+		condition/unless：表明缓存条件，可以使用SpEL语法
+-2）@CachePut
+	--缓存添加。先执行方法，后将返回值存入缓存。适用于写数据
+	主要属性：value/cacheName、key、condition/unless、beforeInvocation
+	beforeInvocation：false-在实际方法执行后清空缓存，若实际方法抛异常时不清空缓存，true-在实际方法执行前清空缓存
+-3）@CacheEvict
+	--缓存清除。先执行方法，后通过key将缓存里的数据删除。适用于删数据
+	主要属性：value/cacheName、key、allEntries
+	allEntries：表明是否删除命名空间下的所有缓存，默认为false
+-4）@Caching	--构建复杂缓存。
+
+
+自定义key生成
+	有两种形式的key配置：1、自定义keyGenerator；2、手动配置（使用root对象）
+	a）可使用root对象生成key（#root对象可省略）：
+		methodName-当前方法名
+		method-当前方法
+		target-当前被调用的对象
+		targetClass-当前被调用的对象的class
+		args-当前方法参数组成的数组
+		caches-当前被调用的方法使用的Cache
+		--实例：
+		@Cacheable(value = "sampleCache", key="targetClass.getName()+'.'+methodName+'.'+#id")
+		public String getBook(int id) { ... }
+	b）keyGenerator属性
+		Spring还提供了org.springframework.cache.interceptor.KeyGenerator接口,使用keyGenerator去指定实现此接口的bean的名字。
+		--实例：
+		--1）xml引入
+			<bean id="cacheKeyGenerator" class="com.yjy.util.KeyGenerator" />
+			<cache:annotation-driven cache-manager="cacheManager" key-generator="cacheKeyGenerator" proxy-target-class="true" />
+		--2）使用
+			@Cacheable(cacheNames="sampleCache", keyGenerator="myKeyGenerator")
+			public String getBook(int id) { ... }
+

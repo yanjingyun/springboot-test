@@ -16,7 +16,8 @@ public class SpringCacheConfig {
 	@Bean
 	public CacheManager cacheManager() {
 		SimpleCacheManager cacheManager = new SimpleCacheManager();
-		// 配置具体缓存方案：这里配置了名为user1Cache和user2Cache的两个本地缓存ConcurrentMapCache
+		// 配置具体缓存方案(可配置多个)
+		// 这里配置了名为user1Cache和user2Cache的两个本地缓存ConcurrentMapCache
 		cacheManager.setCaches(Arrays.asList(new ConcurrentMapCache("user1Cache"), new ConcurrentMapCache("user2Cache")));
 		return cacheManager;
 	}

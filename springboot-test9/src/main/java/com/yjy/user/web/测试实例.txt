@@ -1,0 +1,27 @@
+实例一：
+http://localhost:8080:findUser?name=testAA //执行几次，发现控制台仅输出一行内容
+说明：当访问该方法时，会从userCache缓存中查询是否存在key，存在则将key对应的value返回（不会打印内容），不存在则执行该方法（会打印内容）并将返回值存入缓存中。
+
+实例二：
+	//先执行update方法，再清空缓存名userCache下key为username的数据
+	@CacheEvict(value="userCache", key="#user.getName()")
+	public void updateAccount(User user) { //...}
+
+// 清空缓存名为userCache下的所有数据
+	@CacheEvict(value="userCache", allEntries=true)
+	public void reload() {}
+
+测试：
+//1.执行实际方法，再缓存数据（此时缓存有key=name1的数据）
+	Account account = accountService.getAccountByName("name1"); 
+//2.先执行实际方法，再清空缓存（此时缓存无key为name1的数据）
+	accountService.updateAccount(account);
+//3.执行执行实际方法，再缓存数据（此时缓存将key=name1的数据再次存入）
+	accountService.getAccountByName("name1");
+
+实例三：
+	// 先执行更新方法，再将结果存入缓存中（不能用@Cacheable注解）
+	@CachePut(value="accountCache",key="#account.getName()")
+	public Account updateAccount(Account account) { //... }
+
+
