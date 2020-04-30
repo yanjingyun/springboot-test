@@ -23,13 +23,15 @@ springboot-test3： 测试统一数据格式返回
 		--封装一个业务异常类MyException，使用ResultEnum存放各种异常信息，并使用@ExceptionHandler注解处理捕获的异常。
 		一共分三类异常：
 			1、自定义的异常 new MyException(...)
-			2、访问链接不存在异常（需要在application.properties配置）。格式：{"code":404,"msg":"找不到系统资源","data":null}
+			2、访问链接不存在异常（需要在application.properties配置）。
+				格式：{"code":404,"msg":"找不到系统资源","data":null}
 			3、系统异常 格式：{"code":-1,"msg":"未知错误","data":null}
+	4.添加validate注解(详情参考PersonController类)
 
 	泛型：
 		public static <T> Result<T> success(T object) {...} //声明
-		List<User> list = new ArrayList<>();
-		Result<List<User>> resultData = ResultUtil.success(list); //使用
+		List<User> list = new ArrayList<>(); //使用
+		Result<List<User>> resultData = ResultUtil.success(list);
 
 
 springboot-test4： 测试SpringDataJpa 一对多、多对多关联映射

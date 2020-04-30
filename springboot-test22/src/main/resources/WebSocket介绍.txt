@@ -1,0 +1,5 @@
+WebSocket介绍：
+WebSocket允许服务端主动向客户端推送消息。
+	在WebSocket API中，浏览器和服务器只需完成一次握手，两者之间就直接可以创建持久性的链接，并进行双向数据传输。
+	WebSocket的目标是在一个单独的持久连接上提供全双工、双向通信。在JavaScript中创建了WebSocket之后，会有一个http请求发送到浏览器以发起连接。在取得服务器响应后，建立的连接会使用http升级从http协议交换为WebSocket协议。
+	--https://blog.csdn.net/Goskalrie/article/details/52190662 相关教程！！！

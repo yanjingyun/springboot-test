@@ -1,4 +1,4 @@
-package com.yjy.test.controller;
+package com.yjy.test.web;
 
 import java.util.ArrayList;
 import java.util.List;

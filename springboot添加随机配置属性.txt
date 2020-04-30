@@ -1,0 +1,35 @@
+
+1.添加config/random.properties文件
+	#随机32位MD5字符串
+	user.random.secret=${random.value}
+
+	#随机int数字
+	user.random.intNumber=${random.int}
+
+	#随机long数字
+	user.random.longNumber=${random.long}
+
+	#随便uuid
+	user.random.uuid=${random.uuid}
+
+	#随机10以内的数字
+	user.random.lessTen=${random.int(10)}
+
+	#随机1024~65536之内的数字
+	user.random.range=${random.int[1024,65536]}
+
+绑定类：
+@Component
+@ConfigurationProperties(prefix = "user.random")
+@PropertySource(value = { "config/random.properties" })
+public class RandomConfig {
+
+	private String secret;
+	private int intNumber;
+	private int lessTen;
+	private int range;
+	private long longNumber;
+	private String uuid;
+
+	get/set方法...
+}

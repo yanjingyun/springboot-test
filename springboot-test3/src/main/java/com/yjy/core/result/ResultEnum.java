@@ -5,6 +5,7 @@ public enum ResultEnum {
     SUCCESS(0, "成功"),
     ERROR_TEST1(101, "错误1..."),
     ERROR_TEST2(102, "错误2..."),
+    ERROR_TEST3(103, "字段校验不通过！"),
     ;
 
     private Integer code;

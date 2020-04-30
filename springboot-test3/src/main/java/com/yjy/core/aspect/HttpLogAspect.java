@@ -24,39 +24,40 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Aspect
 @Component
 public class HttpLogAspect {
-    private final static Logger logger = LoggerFactory.getLogger(HttpLogAspect.class);
+	private final static Logger logger = LoggerFactory.getLogger(HttpLogAspect.class);
 
-    @Pointcut("execution(public * com.yjy.*.controller.*.*(..))")
-    public void log() { }
+	@Pointcut("execution(public * com.yjy.*.web.*.*(..))")
+	public void log() {
+	}
 
-    @Before("log()")
-    public void doBefore(JoinPoint joinPoint) {
-    }
+	@Before("log()")
+	public void doBefore(JoinPoint joinPoint) {
+	}
 
-    @After("log()")
-    public void doAfter() {
-        logger.info("doAfter.......");
-    }
-    
-    @AfterReturning(returning = "returnValue", pointcut = "log()")
-    public void doAfterReturning(JoinPoint joinPoint, Object returnValue) throws JsonProcessingException {
-    	ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        ObjectMapper mapper = new ObjectMapper();
-        
-        logger.info("doAfterReturning...");
-        logger.info("模拟日志记录功能...");
-        logger.info("url={}", request.getRequestURL());
-        logger.info("ip地址={}", request.getRemoteAddr());
-        logger.info("方法名class_method={}", joinPoint.getSignature());
-        logger.info("参数agrs={}", mapper.writeValueAsString(joinPoint.getArgs()));
-        logger.info("返回值reponse={}", mapper.writeValueAsString(returnValue));
-        logger.info("被织入的目标对象obj={}", joinPoint.getTarget());
-    }
-    
-    @AfterThrowing(throwing = "ex", pointcut = "log()")
-    public void doAfterThrowing(JoinPoint joinPoint, Throwable ex) {
-    	logger.error("doAfterThrowing...");
-    	logger.error("exception={}", ex);
-    }
+	@After("log()")
+	public void doAfter() {
+		logger.info("doAfter.......");
+	}
+
+	@AfterReturning(returning = "returnValue", pointcut = "log()")
+	public void doAfterReturning(JoinPoint joinPoint, Object returnValue) throws JsonProcessingException {
+		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+		HttpServletRequest request = attributes.getRequest();
+		ObjectMapper mapper = new ObjectMapper();
+
+		logger.info("doAfterReturning...");
+		logger.info("模拟日志记录功能...");
+		logger.info("url={}", request.getRequestURL());
+		logger.info("ip地址={}", request.getRemoteAddr());
+		logger.info("方法名class_method={}", joinPoint.getSignature());
+		logger.info("参数agrs={}", mapper.writeValueAsString(joinPoint.getArgs()));
+		logger.info("返回值reponse={}", mapper.writeValueAsString(returnValue));
+		logger.info("被织入的目标对象obj={}", joinPoint.getTarget());
+	}
+
+	@AfterThrowing(throwing = "ex", pointcut = "log()")
+	public void doAfterThrowing(JoinPoint joinPoint, Throwable ex) {
+		logger.error("doAfterThrowing...");
+		logger.error("exception={}", ex);
+	}
 }
