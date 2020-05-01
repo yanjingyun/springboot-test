@@ -129,6 +129,12 @@ springboot-test11： 测试jpa添加基础字段
 			@PrePersist/@PreRemove/@PostPersist/@PostRemove/@PreUpdate/@PostUpdate/@PostLoad 注解
 	ApplicationUtils类：获取ApplicationContext和bean方法
 
+springboot-test11-v2： 测试jpa添加基础字段(v2版本)
+	描述：
+		除了添加创建时间/创建用户/最后更新时间/最后更新用户这些基础字段外，可能还存在其它基础字段，如创建机构/最后更新机构等，在save时同样需要自动赋值。
+	解决：
+		使用@PrePersist/@PreUpdate等注解
+
 
 springboot-test12-part1 && springboot-test12-part2 测试RestTemplate的使用
 	RestTemplate是Spring提供的用于访问Rest服务的客户端，RestTemplate提供了多种便捷访问远程http服务的方法，能够大大提高客户端的编写效率。
