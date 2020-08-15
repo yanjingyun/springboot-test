@@ -1,19 +1,21 @@
-package com.yjy.test.web;
+package com.yjy.test1.web;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yjy.core.exception.MyException;
 import com.yjy.core.result.Result;
 import com.yjy.core.result.ResultEnum;
 import com.yjy.core.result.ResultUtil;
-import com.yjy.test.entity.User;
+import com.yjy.test1.entity.User;
 
 @RestController
+@RequestMapping("/test1")
 public class UserController {
 
 	// 测试日志：查询所有记录
@@ -61,21 +63,15 @@ public class UserController {
 	}
 
 	// 统一数据格式:测试自定义抛出异常
-	@GetMapping(value = "/data/testException2")
-	public Result<?> testException2() {
-		throw new MyException(ResultEnum.ERROR_TEST2); // 抛异常
+	@GetMapping(value = "/data/testMyException1")
+	public Result<?> testMyException1() {
+		throw new MyException(ResultEnum.ERROR_TEST1); // 抛异常
 		// return ResultUtil.success();
 	}
 
 	// 统一数据格式:测试自定义异常
-	@GetMapping(value = "/data/testException3")
-	public Result<?> testException3() {
-		return ResultUtil.error(ResultEnum.ERROR_TEST1.getCode(), ResultEnum.ERROR_TEST1.getMsg());
-	}
-
-	// 统一数据格式:测试自定义异常
-	@GetMapping(value = "/data/testException4")
-	public Result<?> testException4() {
+	@GetMapping(value = "/data/testMyException2")
+	public Result<?> testMyException2() {
 		return ResultUtil.error(ResultEnum.ERROR_TEST2.getCode(), ResultEnum.ERROR_TEST2.getMsg());
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4077d59c-0706-4182-bc8a-8473aee1845c",
+		"_postman_id": "cd56fddd-550a-40a7-ab1f-8812d232d2af",
 		"name": "SpringBootTest3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,22 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/test1/users?name=testABC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test1",
+						"users"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "testABC"
+						}
+					]
 				}
 			},
 			"response": []
@@ -22,7 +37,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/test1/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test1",
+						"users",
+						"1"
+					]
 				}
 			},
 			"response": []
@@ -33,7 +58,22 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/test1/data?name=testABC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test1",
+						"data"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "testABC"
+						}
+					]
 				}
 			},
 			"response": []
@@ -44,7 +84,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/test1/data/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test1",
+						"data",
+						"1"
+					]
 				}
 			},
 			"response": []
@@ -55,29 +105,101 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/test1/data/testException",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test1",
+						"data",
+						"testException"
+					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "统一数据格式:测试自定义抛出异常",
+			"name": "统一数据格式：测试404异常1",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/test1/data2/testException",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test1",
+						"data2",
+						"testException"
+					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "统一数据格式:测试自定义异常（自定义code&message）",
+			"name": "统一数据格式：测试404异常2",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/test1/data/testException2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test1",
+						"data",
+						"testException2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "统一数据格式：测试自定义抛出异常",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/test1/data/testMyException1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test1",
+						"data",
+						"testMyException1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "统一数据格式：测试自定义异常（自定义code&message）",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/test1/data/testMyException2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test1",
+						"data",
+						"testMyException2"
+					]
 				}
 			},
 			"response": []
@@ -85,6 +207,93 @@
 		{
 			"name": "测试校验",
 			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": \"testName\",\r\n    \"age\": 15,\r\n    \"email\": \"123qq.com\",\r\n    \"phone\": \"13212345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/test2/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test2",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "统一数据格式：测试校验",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": \"testName\",\r\n    \"age\": 20,\r\n    \"email\": \"123@qq.com\",\r\n    \"phone\": \"13212345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/test2/validate2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test2",
+						"validate2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "统一数据格式：测试校验异常",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"1\",\r\n    \"name\": \"testName\",\r\n    \"age\": 15,\r\n    \"email\": \"123qq.com\",\r\n    \"phone\": \"132123456781\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/test2/validate2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test2",
+						"validate2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "统一数据格式：返回多个参数",
+			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -94,12 +303,21 @@
 			"response": []
 		},
 		{
-			"name": "统一数据格式：测试校验",
+			"name": "统一数据格式：返回多个参数(vo实体)",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/test3/index2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test3",
+						"index2"
+					]
 				}
 			},
 			"response": []

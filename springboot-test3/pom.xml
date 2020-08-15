@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yjy</groupId>
-	<artifactId>springboot-test2</artifactId>
+	<artifactId>springboot-test3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>springboot-test2</name>
+	<name>springboot-test3</name>
 	<url>http://maven.apache.org</url>
 
 	<parent>

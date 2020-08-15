@@ -12,7 +12,7 @@ import com.yjy.core.result.ResultUtil;
 import com.yjy.test2.entity.Person;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/test2")
 public class PersonController {
 
 	@RequestMapping("/validate")
