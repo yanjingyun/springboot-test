@@ -16,22 +16,19 @@ springboot-test2： 测试SpringDataJpa使用
 
 
 springboot-test3： 测试统一数据格式返回
+	--测试详情参考《测试用例.postman_collection.json》
 	1.http日志输出
 		通过AOP切入：@Aspect @Pointcut @Before @After @AfterReturning @Around
 	2.统一数据格式返回，格式：{code: xxx, msg: xxx, data: []|{} }
 	3.统一异常处理
 		--封装一个业务异常类MyException，使用ResultEnum存放各种异常信息，并使用@ExceptionHandler注解处理捕获的异常。
-		一共分三类异常：
-			1、自定义的异常 new MyException(...)
-			2、访问链接不存在异常（需要在application.properties配置）。
-				格式：{"code":404,"msg":"找不到系统资源","data":null}
-			3、系统异常 格式：{"code":-1,"msg":"未知错误","data":null}
-	4.添加validate注解(详情参考PersonController类)
-
-	泛型：
-		public static <T> Result<T> success(T object) {...} //声明
-		List<User> list = new ArrayList<>(); //使用
-		Result<List<User>> resultData = ResultUtil.success(list);
+		1、自定义的异常 new MyException(...)
+		2、访问链接不存在异常（需要在application.properties配置）。
+			格式：{"code":404,"msg":"找不到系统资源","data":null}
+		3、系统异常 格式：{"code":-1,"msg":"未知错误","data":null}
+		4、测试校验异常(MethodArgumentNotValidException)（参考PersonController类）
+	4.测试多个实体返回（详情参考UserRoleController类）
+		描述：entity实体需转换成vo实体，如user的password字段在userVo是没有的
 
 
 springboot-test4： 测试SpringDataJpa 一对多、多对多关联映射
@@ -205,9 +202,10 @@ springboot-test20： 测试jwt使用
 
 
 springboot-test21： 测试前端传参实体与数据库实体结合
-	--该项目引入了commons-beanutils包
-	--模拟从前端传入部分字段，从数据库获取部分字段，将上面两个结合后得到新实体，jpa再保存该新实体。
-	前言：我们数据库的字段可能很多，但是前端页面能修改的字段可能就几个，jpa的保存机制直接保存整个实体，因此需要保存的应是将前端实体和后端实体结合后得到的实体。如：用户表有用户名、密码、出生日期，但前端仅允许修改用户名、出生日期，因此在保存时将前端传过来的用户名、出生日期，与数据库得到的密码结合，得到新的实体，再保存该新实体。
+	--该项目引入了commons-beanutils包（已移除，commons-beanutils 1.9.3不安全）
+	--描述：
+		从前端传入部分字段，从数据库获取部分字段，将上面两个结合后得到新实体，jpa再保存该新实体。
+		我们数据库的字段可能很多，但是前端页面能修改的字段可能就几个，jpa的保存机制直接保存整个实体，因此需要保存的应是将前端实体和后端实体结合后得到的实体。如：用户表有用户名、密码、出生日期，但前端仅允许修改用户名、出生日期，因此在保存时将前端传过来的用户名、出生日期，与数据库得到的密码结合，得到新的实体，再保存该新实体。
 	--测试详情参考UserController类
 	作用：
 		1、保证恶意修改其它不必要的字段。保证前端仅能修改的是用户名和出生日期，密码从前端传入无效。

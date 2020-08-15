@@ -40,6 +40,7 @@ public class User extends AudutEntity {
 
 	@Override
 	public String toString() {
+		super.toString();
 		return "User [username=" + username + ", password=" + password + ", birthday=" + birthday + "]";
 	}
 }
