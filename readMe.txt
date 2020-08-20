@@ -28,7 +28,8 @@ springboot-test3： 测试统一数据格式返回
 		3、系统异常 格式：{"code":-1,"msg":"未知错误","data":null}
 		4、测试校验异常(MethodArgumentNotValidException)（参考PersonController类）
 	4.测试多个实体返回（详情参考UserRoleController类）
-		描述：entity实体需转换成vo实体，如user的password字段在userVo是没有的
+		描述1：统一数据格式里面只能返回一个泛型T的对象，但是我们有时候需要返回两个以上的对象（如有时候会把User对象和Rle对象一起返回）就无能为力了，因此需要处理能返回多个对象的情况。
+		描述2：有时候我们返回User对象，但是该对象中的password字段不能给，因此需要将User对象转换成vo对象，然后将vo对象返回给前端。
 
 
 springboot-test4： 测试SpringDataJpa 一对多、多对多关联映射
@@ -158,11 +159,13 @@ springboot-test16： 测试表单提交后相关操作
 
 
 springboot-test17： 测试使用druid数据库连接池
+	描述：Druid是一个非常好用的数据库连接池，自身带有一个强大的监控工具：DruidMonitor，不仅可以监控数据源和慢查询，还可以监控web应用、url监控、Session监控、Spring监控。
+	测试：浏览器输入“http://localhost:8080/druid/login.html”，登录用户“druid/druid”，能进入监控工具。
 	数据库连接池选择：
 		性能方面：HikariCP > Druid > Tomcat-jdbc > Dbcp > C3p0
 		1）HikariCP是springboot的默认连接池，目前性能最好。hikariCP的高性能得益于最大限度的避免锁竞争
 		2）Druid功能最全面，sql拦截、统计数据等，具有良好的扩展性。
-		开启prepareStatement缓存，即PSCache，对性能会有大概20%的提升
+			开启prepareStatement缓存，即PSCache，对性能会有大概20%的提升
 	参考文章：https://blog.csdn.net/justlpf/article/details/80728529
 	官方文档：https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
 
