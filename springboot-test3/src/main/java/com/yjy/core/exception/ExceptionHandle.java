@@ -17,6 +17,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import com.yjy.core.result.Result;
 import com.yjy.core.result.ResultEnum;
 import com.yjy.core.result.ResultUtil;
+import com.yjy.core.util.ErrorUtil;
 
 @ControllerAdvice
 public class ExceptionHandle {
@@ -26,7 +27,8 @@ public class ExceptionHandle {
 	@ExceptionHandler(value = MyException.class)
 	@ResponseBody
 	public Result<?> handle(MyException e) {
-		log.error("【自定义异常】{}", e);
+		log.error(ErrorUtil.getStackTraceAsString(e));
+//		log.error("【自定义异常】{}", e);
 		return ResultUtil.error(e.getCode(), e.getMessage());
 	}
 	
