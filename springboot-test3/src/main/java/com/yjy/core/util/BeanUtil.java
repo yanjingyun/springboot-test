@@ -35,6 +35,15 @@ public class BeanUtil {
 		ParameterizedType p = (ParameterizedType) type;
 		return (Class<?>) p.getActualTypeArguments()[i];
 	}
+	
+	/**
+	 * 获取bean的某个属性值
+	 */
+	public static Object getProperty(Object bean, String name) {
+		Field field = ReflectionUtils.findField(bean.getClass(), name);
+		ReflectionUtils.makeAccessible(field);
+		return ReflectionUtils.getField(field, bean);
+	}
 
 	/**
 	 * 对bean的某个属性赋值

@@ -1,18 +1,21 @@
 package com.yjy.test3.vo;
 
-import org.springframework.beans.BeanUtils;
-
+import com.yjy.core.util.BeanUtil;
 import com.yjy.test3.entity.Role;
 import com.yjy.test3.entity.User;
 
 public class UserRoleVo {
-	private UserVo user = new UserVo();
-	private RoleVo role = new RoleVo();
+	private UserVo user;
+	private RoleVo role;
 	
 	public static UserRoleVo convertResultData(User user, Role role) {
 		UserRoleVo vo = new UserRoleVo();
-		BeanUtils.copyProperties(user, vo.getUser());
-		BeanUtils.copyProperties(role, vo.getRole());
+		UserVo userVo = BeanUtil.convertEntity(user, UserVo.class);
+		vo.setUser(userVo);
+		
+		RoleVo roleVo = BeanUtil.convertEntity(user, RoleVo.class);
+		vo.setRole(roleVo);
+		
 		return vo;
 	}
 	

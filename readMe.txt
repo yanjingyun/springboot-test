@@ -30,6 +30,23 @@ springboot-test3： 测试统一数据格式返回
 	4.测试多个实体返回（详情参考UserRoleController类）
 		描述1：统一数据格式里面只能返回一个泛型T的对象，但是我们有时候需要返回两个以上的对象（如有时候会把User对象和Rle对象一起返回）就无能为力了，因此需要处理能返回多个对象的情况。
 		描述2：有时候我们返回User对象，但是该对象中的password字段不能给，因此需要将User对象转换成vo对象，然后将vo对象返回给前端。
+	5.entity/list裁剪(详情参考Test4Controller类)
+		描述：查询DB得到的entity或list是数据库表的所有字段，如果直接将所有字段全部返回给前端，会增加传输压力，而且有些敏感字段也不允许给到前端，因此需要裁剪部分字段。
+			entity裁剪：User -> UserVo
+			list裁剪： List<User> -> List<UserVo>
+	6.测试DB更新实体(详情参考Test5Controller类)
+		描述：前端传部分字段到后端，然后后端通过查询数据库最新记录，再通过反射得到数据库记录与前台实体结合后的实体，jpa直接保存该实体即可
+		--我们数据库的字段可能很多，但是前端页面能修改的字段可能就几个，jpa的保存机制直接保存整个实体，因此需要保存的应是将前端实体和后端实体结合后得到的实体。如：用户表有用户名、密码、出生日期，但前端仅允许修改用户名、出生日期，因此在保存时将前端传过来的用户名、出生日期，与数据库得到的密码结合，得到新的实体，再保存该新实体。
+		作用：
+			1、保证恶意修改其它不必要的字段。保证前端仅能修改的是用户名和出生日期，密码从前端传入无效。
+			2、部分字段为公共字段，如id、versionNumber、createUser、createTime、lastUpdateUser、lastUpdateTime等，公共字段会抽象成一个类，具体数据库实体继承这些类，从而添加了这些公共字段。在set属性时需要对这一部分字段的赋值。
+			--附：若仅更新几个字段，可以使用jdbcTemplate进行更新，但这样不能保证jpa的乐观锁是否一致。
+
+	--aop版log日志
+	作用：用于记录当前请求的开始时间、结束时间、token、请求参数、返回参数、异常信息等数据。
+	实现：统一对Controller层进行增强，针对某些在filter层抛异常返回的可以直接调用一个controller方法也能够进行aop代理，如SpringSecurity的filter可能会不经过controller层。
+	日志记录：startTime,endTime,url,token,username
+	日志详细记录：requestObj（由于所有controller方法参数都只有一个，json格式）,responseObj,exceptionStack
 
 
 springboot-test4： 测试SpringDataJpa 一对多、多对多关联映射

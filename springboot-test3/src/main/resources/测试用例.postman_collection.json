@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "cd56fddd-550a-40a7-ab1f-8812d232d2af",
+		"_postman_id": "a7e596ff-4c29-4e4e-8529-afdcbef861c8",
 		"name": "SpringBootTest3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -205,7 +205,7 @@
 			"response": []
 		},
 		{
-			"name": "测试校验",
+			"name": "测试校验2",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -234,7 +234,7 @@
 			"response": []
 		},
 		{
-			"name": "统一数据格式：测试校验",
+			"name": "统一数据格式2：测试校验",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -263,7 +263,7 @@
 			"response": []
 		},
 		{
-			"name": "统一数据格式：测试校验异常",
+			"name": "统一数据格式2：测试校验异常",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -292,18 +292,27 @@
 			"response": []
 		},
 		{
-			"name": "统一数据格式：返回多个参数",
+			"name": "统一数据格式3：返回多个参数",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "http://localhost:8080/test3/index1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test3",
+						"index1"
+					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "统一数据格式：返回多个参数(vo实体)",
+			"name": "统一数据格式3：返回多个参数(vo实体)",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -316,6 +325,86 @@
 					"port": "8080",
 					"path": [
 						"test3",
+						"index2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "统一数据格式4：测试entity裁剪",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/test4/index2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test4",
+						"index2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "统一数据格式4：测试list裁剪",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/test4/index3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test4",
+						"index3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "统一数据格式5：测试DB更新实体",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/test5/index1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test5",
+						"index1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "统一数据格式5：测试DB更新实体（报错）",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/test5/index2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"test5",
 						"index2"
 					]
 				}
