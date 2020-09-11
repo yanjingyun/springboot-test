@@ -47,7 +47,7 @@ public class SaveVo<T> {
 			}
 
 			// 非最新数据不允许DB更新操作
-			int versionNumber = (int) BeanUtil.getProperty(entity, "versionNumber");
+			int versionNumber = (int) BeanUtil.getPropertyValue(entity, "versionNumber");
 			if (versionNumber != this.versionNumber) {
 				throw new MyException(ResultEnum.ERROR_TEST4);
 			}

@@ -27,19 +27,21 @@ public class BeanUtil {
 	}
 
 	/**
-	 * 反射获取泛型父类的实际参数 
+	 * 反射获取泛型父类的实际参数
 	 */
-	// 例如： 在UserSaveVo extends SaveVo<User>中，通过SaveVo#getClass()得到UserSaveVo类，通过getTypeArguments(getClass(), 0)得到父类SaveVo的User参数
+	// 例如： 在UserSaveVo extends
+	// SaveVo<User>中，通过SaveVo#getClass()得到UserSaveVo类，通过getTypeArguments(getClass(),
+	// 0)得到父类SaveVo的User参数
 	public static Class<?> getTypeArguments(Class<?> clazz, int i) {
 		Type type = clazz.getGenericSuperclass();
 		ParameterizedType p = (ParameterizedType) type;
 		return (Class<?>) p.getActualTypeArguments()[i];
 	}
-	
+
 	/**
 	 * 获取bean的某个属性值
 	 */
-	public static Object getProperty(Object bean, String name) {
+	public static Object getPropertyValue(Object bean, String name) {
 		Field field = ReflectionUtils.findField(bean.getClass(), name);
 		ReflectionUtils.makeAccessible(field);
 		return ReflectionUtils.getField(field, bean);
@@ -52,13 +54,9 @@ public class BeanUtil {
 		Field field = ReflectionUtils.findField(bean.getClass(), name);
 		ReflectionUtils.makeAccessible(field);
 		ReflectionUtils.setField(field, bean, value);
-		/*
-		 * // 移除commons-beanutils类，使用spring的ReflectionUtils类替换
-		 * try {
-		 * org.apache.commons.beanutils.PropertyUtils.setProperty(bean, name, value); }
-		 * catch (IllegalAccessException | InvocationTargetException |
-		 * NoSuchMethodException e) { e.printStackTrace(); }
-		 */
+
+		// 移除commons-beanutils类，使用spring的ReflectionUtils类替换
+		// org.apache.commons.beanutils.PropertyUtils.setProperty(bean, name, value);
 	}
 
 	/**
@@ -84,4 +82,14 @@ public class BeanUtil {
 		return ((List<?>) list).stream().map(entity -> BeanUtil.convertEntity(entity, clazz))
 				.collect(Collectors.toList());
 	}
+
+	// /**
+	// * page 裁剪转换
+	// */
+	// public static <T> Page<T> convertPage(Object page, Class<T> clazz) {
+	// Page<T> mapPage = ((Page<?>) page).map(entity ->
+	// BeanUtil.convertEntity(entity, clazz));
+	// return new PageImpl<T>(mapPage.getContent(), mapPage.getPageable(),
+	// mapPage.getTotalElements());
+	// }
 }

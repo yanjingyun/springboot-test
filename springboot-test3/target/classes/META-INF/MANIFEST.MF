@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: springboot-test3
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: user
+Built-By: yanjingyun
 Implementation-Vendor-Id: com.yjy
 Build-Jdk: 1.8.0_144
 Implementation-URL: http://maven.apache.org
