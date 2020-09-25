@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 import com.yjy.user.domain.User;
@@ -104,5 +105,42 @@ public class UserRest {
 		RestTemplate restTemplate = new RestTemplate();
 		User str = restTemplate.postForObject("http://localhost:8080/users", requestData, User.class);
 		System.out.println(str);
+	}
+	
+	private RestTemplate getRestTemplate() {
+		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+		requestFactory.setConnectTimeout(1000); // 连接超时时间
+		requestFactory.setReadTimeout(1000); // 从服务器读取超时
+		return new RestTemplate(requestFactory);
+	}
+	
+	/**
+	 * 测试连接超时
+	 */
+	@Test
+	public void testConnectionTimeout() {
+		RestTemplate restTemplate = getRestTemplate();
+		try {
+			String responseData = restTemplate.getForObject("http://localhost:8080/users/testTimeout11", String.class);
+			System.out.println(responseData);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * 测试请求超时
+	 */
+	@Test
+	public void testReadTimeout() {
+		RestTemplate restTemplate = getRestTemplate();
+		try {
+			String responseData = restTemplate.getForObject("http://localhost:8080/users/testTimeout", String.class);
+			System.out.println(responseData);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

@@ -40,4 +40,16 @@ public class UserController {
 	public String testHttpPost(String username, String password) {
 		return "post请求：" + username + "&&" + password;
 	}
+	
+	
+	// 测试请求超时
+	@GetMapping("/testTimeout")
+	public String testTimeout() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return "get请求：测试请求超时";
+	}
 }

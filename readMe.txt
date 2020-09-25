@@ -154,6 +154,18 @@ springboot-test11-v2： 测试jpa添加基础字段(v2版本)
 springboot-test12-part1 && springboot-test12-part2 测试RestTemplate的使用
 	RestTemplate是Spring提供的用于访问Rest服务的客户端，RestTemplate提供了多种便捷访问远程http服务的方法，能够大大提高客户端的编写效率。
 	有时候项目中要建立多个微服务，或者把一个大的项目拆分成多个微服务进行解耦，为了方便完成各个微服务之间进行互相调用，Spring封装了http请求模板类RestTemplate
+	示例：
+		普通http测试（数字占位符传参）
+		普通http测试（map传参）
+		Object类型传参，针对请求参数较少
+		Map类型传参，针对请求参数很多
+		Map类型传参，针对请求参数很多
+		Post请求，模拟新增用户-User类型传参
+		Post请求，模拟新增用户-Map传参
+		测试连接超时
+		测试请求超时
+
+
 
 springboot-test13： 测试生成日志文件
 
