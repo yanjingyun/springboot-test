@@ -198,6 +198,11 @@ springboot-test17： 测试使用druid数据库连接池
 	参考文章：https://blog.csdn.net/justlpf/article/details/80728529
 	官方文档：https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
 
+druid遇到的坑：
+	生产环境连接池中，将testOnBorrow=false，由于不检查连接是否可用，应用通过getConnection()获取的连接可能不可用。
+
+	统计SQL中是用map保存的，sql太多时会导致oom异常。详情：https://github.com/alibaba/druid/issues/1664
+
 
 springboot-test18-part1 & springboot-test18-part2 ： 测试spring session共享(redis缓存)
 	参考：

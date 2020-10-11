@@ -24,4 +24,9 @@ public class UserService {
 	public User add(User user) {
 		return userDao.save(user);
 	}
+
+	public User find(Integer id) {
+//		userDao.getOne(id); //报错，getone返回的对象是一个代理对象，要是你作为json对象返回就会报错
+		return userDao.findById(id).orElse(new User());
+	}
 }

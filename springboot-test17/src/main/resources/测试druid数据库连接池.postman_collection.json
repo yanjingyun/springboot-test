@@ -1,0 +1,53 @@
+{
+	"variables": [],
+	"info": {
+		"name": "测试druid数据库连接池",
+		"_postman_id": "5d77069a-7e6a-8507-4dd7-36c4e942ea97",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "用户新增",
+			"request": {
+				"url": "http://localhost:8080/user/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"TestAA1\",\n\t\"birthday\": \"2020-03-02\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "用户列表",
+			"request": {
+				"url": "http://localhost:8080/user/list",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "用户信息",
+			"request": {
+				"url": "http://localhost:8080/user/find/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
