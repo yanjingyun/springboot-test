@@ -42,6 +42,12 @@ springboot-test3： 测试统一数据格式返回
 			2、部分字段为公共字段，如id、versionNumber、createUser、createTime、lastUpdateUser、lastUpdateTime等，公共字段会抽象成一个类，具体数据库实体继承这些类，从而添加了这些公共字段。在set属性时需要对这一部分字段的赋值。
 			--附：若仅更新几个字段，可以使用jdbcTemplate进行更新，但这样不能保证jpa的乐观锁是否一致。
 	7.测试配置文件内容注入(详情参考Test6Controller类)
+		方式1：Environment形式
+		方式2：@Value形式
+		方式3：@ConfigurationProperties形式
+	8.actuator测试
+		查看项目状态：http://localhost:8080/actuator/health
+		查看所有用户：http://localhost:8080/actuator/user
 
 	--aop版log日志
 	作用：用于记录当前请求的开始时间、结束时间、token、请求参数、返回参数、异常信息等数据。
