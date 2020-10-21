@@ -281,6 +281,7 @@ springboot-test24： 测试不同数据库插入解决分布式事务问题
 	使用jta来解决多数据源的分布式事务问题（2pc实现）
 	缺点：不能解决微服务的分布式事务（远程调用失败后处理不了回滚问题）
 
-
+springboot-test25： 测试springboot整合mybatis框架
+	
 
 
