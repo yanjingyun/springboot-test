@@ -13,8 +13,32 @@ public class UserService {
 
 	@Autowired
 	private UserMapper userMapper;
+	
+	public int insert(User user) {
+		return userMapper.insert(user);
+	}
+	
+	public int delete(Long id) {
+		return userMapper.delete(id);
+	}
+	
+	public int update(User user) {
+		return userMapper.update(user);
+	}
+	
+	public User findById(Long id) {
+		return userMapper.findById(id);
+	}
 
 	public List<User> findAll() {
 		return userMapper.findAll();
+	}
+
+	public List<User> findAllHasOrder() {
+		return userMapper.findAllHasOrder();
+	}
+	
+	public List<User> findByUser(User user) {
+		return userMapper.findByUser(user);
 	}
 }

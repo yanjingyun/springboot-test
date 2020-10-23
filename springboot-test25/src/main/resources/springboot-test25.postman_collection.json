@@ -1,0 +1,137 @@
+{
+	"variables": [],
+	"info": {
+		"name": "springboot-test25",
+		"_postman_id": "e5308cac-aef1-de67-7757-a1b82966ea48",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "新增用户",
+			"request": {
+				"url": "localhost:8080/user/insert",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"testAA\",\n\t\"age\": 30\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "删除用户",
+			"request": {
+				"url": "localhost:8080/user/delete/6",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "更新用户",
+			"request": {
+				"url": "localhost:8080/user/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"username\": \"testAX\",\n\t\"age\": 23\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "查看某个用户",
+			"request": {
+				"url": "localhost:8080/user/find/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "查看所有用户",
+			"request": {
+				"url": "localhost:8080/user/findAll",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "查看所有订单",
+			"request": {
+				"url": "localhost:8080/order/findAll",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "查用用户订单",
+			"request": {
+				"url": "localhost:8080/order/find/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "查看存在订单记录的所有用户",
+			"request": {
+				"url": "localhost:8080/user/findAllHasOrder",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "动态SQL查询",
+			"request": {
+				"url": "localhost:8080/user/findByUser",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"02\",\n\t\"age\": 20\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -10,6 +10,8 @@ public class Order implements Serializable {
 
 	private String name;
 
+	private Long userId;
+
 	public Long getId() {
 		return id;
 	}
@@ -24,6 +26,14 @@ public class Order implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 }

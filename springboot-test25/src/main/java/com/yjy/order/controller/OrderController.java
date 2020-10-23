@@ -23,7 +23,7 @@ public class OrderController {
 	}
 	
 	@RequestMapping("/find/{userId}")
-	public List<Order> findByUserId(@PathVariable("userId") String userId) {
+	public List<Order> findByUserId(@PathVariable("userId") Long userId) {
 		return userService.findByUserId(userId);
 	}
 }

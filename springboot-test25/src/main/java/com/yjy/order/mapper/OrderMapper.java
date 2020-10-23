@@ -14,5 +14,5 @@ public interface OrderMapper {
 	List<Order> findAll();
 	
 	@Select("select * from tb_order t where t.user_id = #{userId}")
-	List<Order> findByUserId(String userId);
+	List<Order> findByUserId(Long userId);
 }

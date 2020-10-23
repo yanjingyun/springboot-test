@@ -282,6 +282,6 @@ springboot-test24： 测试不同数据库插入解决分布式事务问题
 	缺点：不能解决微服务的分布式事务（远程调用失败后处理不了回滚问题）
 
 springboot-test25： 测试springboot整合mybatis框架
-	
-
+	user表的增删改查操作，exists查询，动态sql查询
+	打印sql日志
 

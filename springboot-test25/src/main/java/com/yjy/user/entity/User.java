@@ -10,7 +10,7 @@ public class User implements Serializable {
 
 	private String username;
 
-	private String password;
+	private Integer age;
 
 	public Long getId() {
 		return id;
@@ -28,12 +28,11 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public Integer getAge() {
+		return age;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setAge(Integer age) {
+		this.age = age;
 	}
-
 }
