@@ -14,6 +14,10 @@ public class OrderService {
 	@Autowired
 	private OrderMapper orderMapper;
 
+	public int insert(Order order) {
+		return orderMapper.insert(order);
+	}
+	
 	public List<Order> findAll() {
 		return orderMapper.findAll();
 	}

@@ -20,6 +20,9 @@ public class UserMapperProvider {
 			sb.append(" and t.age >= #{age}");
 		}
 		
+		// 存在一条订单记录
+//		sb.append(" and exists (select 1 from tb_order a where a.user_id = t.id)");
+		
 		return (sb.length() > 0) ? (sql + " where 1 = 1" + sb.toString()) : sql;
 	}
 }

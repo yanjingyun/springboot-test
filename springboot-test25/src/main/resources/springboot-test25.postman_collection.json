@@ -92,6 +92,26 @@
 			"response": []
 		},
 		{
+			"name": "保存订单",
+			"request": {
+				"url": "localhost:8080/order/insert",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"orderName1\",\n\t\"userId\": 2\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
 			"name": "查用用户订单",
 			"request": {
 				"url": "localhost:8080/order/find/2",
