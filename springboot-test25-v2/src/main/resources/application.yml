@@ -1,0 +1,15 @@
+server:
+  port: 8080
+spring:
+  #数据库连接配置
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///test?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+
+logging:
+  level:
+    com:
+      yjy: debug
+

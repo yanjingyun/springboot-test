@@ -285,3 +285,7 @@ springboot-test25： 测试springboot整合mybatis框架
 	user表的增删改查操作，exists查询，动态sql查询
 	打印sql日志
 
+springboot-test25-v2: 测试mybatis-plus
+	测试相关api方法
+	测试插入/更新操作时的基础字段自动赋值
+	测试乐观锁版本控制
