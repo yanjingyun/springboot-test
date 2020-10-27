@@ -290,3 +290,7 @@ springboot-test25-v2: 测试mybatis-plus
 	测试插入/更新操作时的基础字段自动赋值
 	测试乐观锁版本控制
 	测试分页查询
+
+
+springboot-test26： 测试Api接口文档生成工具
+	运行项目并打开浏览器输入：http://localhost:8080/swagger-ui.html
