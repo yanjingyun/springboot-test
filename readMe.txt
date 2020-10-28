@@ -294,3 +294,19 @@ springboot-test25-v2: 测试mybatis-plus
 
 springboot-test26： 测试Api接口文档生成工具
 	运行项目并打开浏览器输入：http://localhost:8080/swagger-ui.html
+
+
+springboot-test27： 测试RabbitMQ的广播模型
+	举例：公众号一样，我每天推文章后，会推送给每个关注用户，他们都可以看到这条消息
+	广播模型：1、可以有多个队列；2、每个队列都需要绑定交换机；3、每个消费者有自己的队列；4、交换机把消息发送给绑定的所有队列
+	http://localhost:8080/send --生产消息
+
+springboot-test27-v2： 测试RabbitMQ的5种消息模式（详情参考RabbitMqTest类）
+	简单模式
+	工作模式
+	广播模式
+	路由模式
+	主题模式
+
+
+
