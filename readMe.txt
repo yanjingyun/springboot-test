@@ -308,6 +308,9 @@ springboot-test27-v2： 测试RabbitMQ的5种消息模式（详情参考RabbitMq
 	路由模式
 	主题模式
 
+springboot-test27-v3： 测试死信与延时队列
+	
+
 
 springboot-test28： 测试Validator校验工具
 	嵌套属性、集合对象校验
