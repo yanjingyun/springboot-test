@@ -283,6 +283,7 @@ springboot-test24： 测试不同数据库插入解决分布式事务问题
 
 springboot-test25： 测试springboot整合mybatis框架
 	user表的增删改查操作，exists查询，动态sql查询
+	根据id查询order信息，附带部分用户信息，最后封装到vo实体里面
 	打印sql日志
 
 springboot-test25-v2: 测试mybatis-plus

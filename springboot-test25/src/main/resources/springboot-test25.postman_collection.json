@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "springboot-test25",
-		"_postman_id": "e5308cac-aef1-de67-7757-a1b82966ea48",
+		"_postman_id": "efb12f5a-54da-7604-7382-07c0bc7ebc78",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -33,7 +33,10 @@
 				"url": "localhost:8080/user/delete/6",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -64,7 +67,10 @@
 				"url": "localhost:8080/user/find/1",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -75,7 +81,10 @@
 				"url": "localhost:8080/user/findAll",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -86,7 +95,10 @@
 				"url": "localhost:8080/order/findAll",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -112,12 +124,37 @@
 			"response": []
 		},
 		{
+			"name": "查询订单（vo模式，附带部分用户信息）",
+			"request": {
+				"url": "localhost:8080/order/findOrderVo/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "查询订单列表（vo模式，附带部分用户信息）",
+			"request": {
+				"url": "localhost:8080/order/findOrderVoByUserId/2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
 			"name": "查用用户订单",
 			"request": {
 				"url": "localhost:8080/order/find/2",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -128,7 +165,10 @@
 				"url": "localhost:8080/user/findAllHasOrder",
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
