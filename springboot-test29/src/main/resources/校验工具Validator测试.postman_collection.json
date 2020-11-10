@@ -1,0 +1,91 @@
+{
+	"variables": [],
+	"info": {
+		"name": "校验工具Validator测试",
+		"_postman_id": "a2e2fb53-7c46-3612-2b5e-bc78879f7968",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "测试嵌套对象校验1",
+			"request": {
+				"url": "localhost:8080/test1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"testAA\",\n\t\"mobilePhone\": \"\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "测试嵌套对象校验2",
+			"request": {
+				"url": "localhost:8080/test1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"testAA\",\n\t\"mobilePhone\": \"\",\n\t\"adress\": {\n\t\t\"name\": \"x\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "测试集合对象1",
+			"request": {
+				"url": "localhost:8080/test2",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"users\": [{\n\t\t\"username\": \"11aa\",\n\t\t\"age\": 23\n\t}]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "测试集合对象2",
+			"request": {
+				"url": "localhost:8080/test2",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"users\": [{\n\t\t\"username\": \"11\",\n\t\t\"age\": 23\n\t}, {\n\t\t\"username\": \"11aa\",\n\t\t\"age\": 12\n\t}]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
