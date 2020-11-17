@@ -1,2 +1,8 @@
-server:
-    port: 8080
+# 端口号
+server.port: 8080
+
+
+# 是否开启swagger（正式环境关闭）
+swagger.enable: true
+# swagger的json格式访问（http://localhost:8080/api-docs可以拿到对应json数据）
+springfox.documentation.swagger.v2.path: /api-docs
