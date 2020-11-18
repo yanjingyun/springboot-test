@@ -1,0 +1,5 @@
+server.port: 8080
+
+# 修改自定义starter的配置信息
+#hello.msg: 123456
+

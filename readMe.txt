@@ -317,5 +317,7 @@ springboot-test28： 测试Validator校验工具
 	嵌套属性、集合对象校验
 
 
+springboot-test30： 测试自定义Starter
+
 
 

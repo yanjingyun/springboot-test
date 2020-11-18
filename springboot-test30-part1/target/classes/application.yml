@@ -1,0 +1,4 @@
+server.port: 8080
+
+# 自定义配置信息
+hello.msg: spring boot autoconfig is hello

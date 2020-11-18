@@ -1,0 +1,4 @@
+com\yjy\hello\config\HelloServiceAutoConfiguration.class
+com\yjy\hello\service\HelloService.class
+META-INF\spring-configuration-metadata.json
+com\yjy\hello\bean\HelloServiceProperties.class
