@@ -2,12 +2,7 @@ package com.yjy.user.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import com.yjy.user.entity.User;
 
@@ -15,7 +10,8 @@ import com.yjy.user.entity.User;
 public interface UserMapper {
 
 	// 新增
-	@Insert("insert into tb_user(username,age) values (#{username}, #{age})")
+	@Insert(value = "insert into tb_user(username,age) values (#{username}, #{age})")
+	@Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id") // @Options能拿到对象自增id，能设置缓存时间
 	int insert(User user);
 
 	// 删除

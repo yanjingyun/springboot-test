@@ -15,7 +15,9 @@ public class UserService {
 	private UserMapper userMapper;
 	
 	public int insert(User user) {
-		return userMapper.insert(user);
+		int insert = userMapper.insert(user);
+		System.out.println("获取主键::" + user.getId());
+		return insert;
 	}
 	
 	public int delete(Long id) {
