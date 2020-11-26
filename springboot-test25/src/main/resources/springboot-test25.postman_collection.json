@@ -1,195 +1,369 @@
 {
-	"variables": [],
 	"info": {
+		"_postman_id": "1772683a-8c8f-476c-ab4a-6a3f77db6428",
 		"name": "springboot-test25",
-		"_postman_id": "efb12f5a-54da-7604-7382-07c0bc7ebc78",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "新增用户",
 			"request": {
-				"url": "localhost:8080/user/insert",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"username\": \"testAA\",\n\t\"age\": 30\n}"
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/user/insert",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"insert"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "删除用户",
 			"request": {
-				"url": "localhost:8080/user/delete/6",
 				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/user/delete/6",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"delete",
+						"6"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "更新用户",
 			"request": {
-				"url": "localhost:8080/user/update",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"id\": 1,\n\t\"username\": \"testAX\",\n\t\"age\": 23\n}"
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/user/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"update"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "查看某个用户",
 			"request": {
-				"url": "localhost:8080/user/find/1",
 				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/user/find/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"find",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "查看所有用户",
 			"request": {
-				"url": "localhost:8080/user/findAll",
 				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/user/findAll",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"findAll"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "查看所有订单",
 			"request": {
-				"url": "localhost:8080/order/findAll",
 				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/order/findAll",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"findAll"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "保存订单",
 			"request": {
-				"url": "localhost:8080/order/insert",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"name\": \"orderName1\",\n\t\"userId\": 2\n}"
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/order/insert",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"insert"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "查询订单（vo模式，附带部分用户信息）",
 			"request": {
-				"url": "localhost:8080/order/findOrderVo/1",
 				"method": "GET",
 				"header": [],
-				"body": {},
-				"description": ""
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/order/findOrderVo/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"findOrderVo",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "查询订单列表（vo模式，附带部分用户信息）",
 			"request": {
-				"url": "localhost:8080/order/findOrderVoByUserId/2",
 				"method": "GET",
 				"header": [],
-				"body": {},
-				"description": ""
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/order/findOrderVoByUserId/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"findOrderVoByUserId",
+						"2"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "查用用户订单",
 			"request": {
-				"url": "localhost:8080/order/find/2",
 				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/order/find/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"find",
+						"2"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "查看存在订单记录的所有用户",
 			"request": {
-				"url": "localhost:8080/user/findAllHasOrder",
 				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": ""
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/user/findAllHasOrder",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"findAllHasOrder"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "动态SQL查询",
 			"request": {
-				"url": "localhost:8080/user/findByUser",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json",
-						"description": ""
+						"value": "application/json"
 					}
 				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n\t\"username\": \"02\",\n\t\"age\": 20\n}"
 				},
-				"description": ""
+				"url": {
+					"raw": "localhost:8080/user/findByUser",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"findByUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "分页查询用户数据",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "start",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "pageSize",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "test01",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "age",
+							"value": "21",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/user/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"list"
+					]
+				}
 			},
 			"response": []
 		}

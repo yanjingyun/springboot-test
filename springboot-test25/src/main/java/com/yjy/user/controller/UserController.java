@@ -2,6 +2,7 @@ package com.yjy.user.controller;
 
 import java.util.List;
 
+import com.yjy.user.controller.vo.UserQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,5 +52,10 @@ public class UserController {
 	@RequestMapping("/findByUser")
 	List<User> findByUser(@RequestBody User user) {
 		return userService.findByUser(user);
+	}
+
+	@RequestMapping("/list")
+	List<User> list(UserQueryParam request) {
+		return userService.list(request);
 	}
 }

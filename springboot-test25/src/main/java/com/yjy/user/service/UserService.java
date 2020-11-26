@@ -2,6 +2,7 @@ package com.yjy.user.service;
 
 import java.util.List;
 
+import com.yjy.user.controller.vo.UserQueryParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,4 +44,8 @@ public class UserService {
 	public List<User> findByUser(User user) {
 		return userMapper.findByUser(user);
 	}
+
+    public List<User> list(UserQueryParam request) {
+		return userMapper.list(request);
+    }
 }

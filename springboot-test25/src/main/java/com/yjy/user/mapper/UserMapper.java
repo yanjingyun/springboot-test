@@ -2,6 +2,7 @@ package com.yjy.user.mapper;
 
 import java.util.List;
 
+import com.yjy.user.controller.vo.UserQueryParam;
 import org.apache.ibatis.annotations.*;
 
 import com.yjy.user.entity.User;
@@ -37,4 +38,8 @@ public interface UserMapper {
 	// 动态生成sql
 	@SelectProvider(type = UserMapperProvider.class, method = "findByUser")
     List<User> findByUser(User user);
+
+	// 分页
+	@SelectProvider(type = UserMapperProvider.class, method = "list")
+    List<User> list(UserQueryParam request);
 }
