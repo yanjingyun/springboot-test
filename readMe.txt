@@ -321,3 +321,8 @@ springboot-test30： 测试自定义Starter
 
 
 
+springboot-test31： 测试整合ElasticSearch
+	规范跟springDataJpa一样。
+	测试参考ArticleTest类
+
+

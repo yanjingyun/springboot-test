@@ -64,7 +64,7 @@ public class UserRest {
 	@Test
 	public void testGetMap() {
 		RestTemplate restTemplate = new RestTemplate();
-		Map<String,Object> params = new HashMap<String,Object>();
+		Map<String,Object> params = new HashMap<>();
 		params.put("id", 22);
 		params.put("name", "testBB");
 		params.put("birthday", "1995-07-10");
