@@ -4,9 +4,11 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.yjy.user.util.HttpUtil;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
@@ -141,6 +143,19 @@ public class UserRest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+
+	/**
+	 * 测试exchange方法
+	 */
+	@Test
+	public void testExchange() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		User requestUser = new User(1, "testPost", Date.valueOf("1994-02-10"));
+		HttpEntity<User> httpEntity = new HttpEntity<>(requestUser, headers);
+
+		User user = HttpUtil.httpRequest("http://localhost:8080/users", HttpMethod.POST, httpEntity, User.class);
+		System.out.println(user);
 	}
 }
