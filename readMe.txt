@@ -321,8 +321,22 @@ springboot-test30： 测试自定义Starter
 
 
 
-springboot-test31： 测试整合ElasticSearch
+springboot-test31： 测试整合ElasticSearch6.2.2
 	规范跟springDataJpa一样。
 	测试参考ArticleTest类
+
+
+springboot-test31-v2 整合elasticsearch7.6.1
+	描述：（出自狂神说的教程）模拟爬取京东搜索数据，并放入es中，后续通过es获取对应搜索数据
+	测试：
+		http://localhost:9090/parse/java
+		http://localhost:9090/ --在输入框中输入“java”，点击搜索，能获取到分页后的10条数据
+
+		http://localhost:9090/parse/kafka --爬取京东数据并放入es中
+		http://localhost:9090/ --在输入框中输入“kafka”，点击搜索，能获取到分页后的10条数据
+
+		http://localhost:9090/parse/文
+		http://localhost:9090/ --在输入框中输入“文”，点击搜索，能获取到分页后的10条数据
+
 
 
