@@ -4,12 +4,15 @@ package com.yjy.elasticsearch.article;
 import com.yjy.elasticsearch.article.document.Article;
 import com.yjy.elasticsearch.article.repository.ArticleRepository;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.json.JSONObject;
+import org.json.JSONString;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,6 +31,7 @@ public class ArticleTest {
     private ArticleRepository articleRepository;
 
     // 保存(新增/更新)
+    // 更新一条数据 说明：如果es数据库中存在相同id的数据，那么就是更新数据！否则就是新增数据。
     @Test
     public void testSave() {
         Article article = new Article();
@@ -58,6 +63,38 @@ public class ArticleTest {
         articleRepository.saveAll(list);
     }
 
+    /**
+     * 删除一条数据
+     * id 删除数据文档id（文档id与数据id相同）
+     */
+    public void testDelete() {
+        Long id = 29L;
+        articleRepository.deleteById(id);
+    }
+
+    /**
+     * 根据id查询
+     */
+    public void testFindById() {
+        Long id = 25L;
+        Optional<Article> optional = articleRepository.findById(id);
+        Article article = optional.orElse(null);
+        System.out.println(article);
+    }
+
+    /**
+     * 分页搜索查询：分页查询标题或分类相同的信息
+     */
+    public void findByNameOrMobile() {
+        int page = 0;
+        int size = 10;
+        Pageable pageable = PageRequest.of(page, size);
+        String title = "title3";
+        String category = "category2";
+        Page<Article> articlePage = articleRepository.findByTitleOrCategory(title, category, pageable);
+    }
+
+
     // 查询所有
     @Test
     public void testFindAll() {
@@ -68,7 +105,7 @@ public class ArticleTest {
         });
     }
 
-    // 根据title查询(spring data 规范)
+    // 根据title查询列表(spring data 规范)
     @Test
     public void testFindByTitle() {
 //        List<Article> list = articleRepository.findByTitle("title5");

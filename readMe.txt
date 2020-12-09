@@ -338,5 +338,10 @@ springboot-test31-v2 整合elasticsearch7.6.1
 		http://localhost:9090/parse/文
 		http://localhost:9090/ --在输入框中输入“文”，点击搜索，能获取到分页后的10条数据
 
+springboot-test31-v3 整合elasticsearch7.6.1
+	测试参考：springboot整合elasticsearch7.postman_collection.json
+	
+
+
 
 

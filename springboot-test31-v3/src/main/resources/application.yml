@@ -1,0 +1,7 @@
+server.port: 8080
+
+# elasticsearch7 不支持
+#spring.data.elasticsearch.cluster-name: elasticsearch #es集群的名称
+#spring.data.elasticsearch.cluster-nodes: 127.0.0.1:9300 #es的连接地址及端口号
+
+spring.elasticsearch.rest.uris: http://localhost:9200

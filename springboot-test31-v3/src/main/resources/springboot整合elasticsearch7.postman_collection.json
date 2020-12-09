@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "3cf6f450-6667-43b7-8153-48649892a299",
+		"name": "springboot整合elasticsearch7",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "初始化数据",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/esuser/init",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"esuser",
+						"init"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "根据id查询",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/esuser/2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"esuser",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "分页",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/esuser/page/0/10",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"esuser",
+						"page",
+						"0",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "根据名字查询",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/esuser/findByName?name=李四",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"esuser",
+						"findByName"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "李四"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "根据名字和介绍查询",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/esuser/findByNameAndInfo?name=李四&info=上海",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"esuser",
+						"findByNameAndInfo"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "李四"
+						},
+						{
+							"key": "info",
+							"value": "上海"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "高亮显示查询",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/esuser/findHightByUser?value=上海",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"esuser",
+						"findHightByUser"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "上海"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
