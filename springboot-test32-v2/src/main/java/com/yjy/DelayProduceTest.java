@@ -14,8 +14,15 @@ public class DelayProduceTest {
     @Autowired
     private DelayProducer delayProducer;
 
+    // 测试发送演示消息，1分钟后才会给到消费端
     @Test
     public void sendDelayMessage() {
-        delayProducer.sendDelayMessage("delay-topic","测试延迟消息",5);
+        delayProducer.sendDelayMessage("delay-topic","sendDelayMessage",5);
+    }
+
+    // 测试发送演示消息，自定义延时时间，90s后才会给到消费端
+    @Test
+    public void sendCustomeDelayMessage() {
+        delayProducer.sendDelayMessage("delay-topic","sendCustomeDelayMessage",1);
     }
 }

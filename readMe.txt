@@ -346,13 +346,21 @@ springboot-test32: 未整合springboot，RocketMQ简单测试基础案例
 
 
 springboot-test32-v2: 整合RocketMQ，延时消息
-	测试：先启动 Application 类，在运行 DelayProduceTest#sendDelayMessage 方法
+	测试：先启动 Application 类，在运行 DelayProduceTest#sendDelayMessage() 方法
 	输出：
+		--测试1：1分钟后消费消息
 		1、在DelayProduceTest看到：
 			发送消息：测试延迟消息，时间：2020年12月25日 11:41:48
 		2、在Application中看到：
 			接收消息：测试延迟消息，时间：2020年12月25日 11:42:48
 		3、说明消息在一分钟后才接收到，测试演示消息成功
+
+		--测试2：自定义延时时间，90s后消费消息
+		1、broker.conf配置文件添加，重启roketmq
+			messageDelayLevel=90s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h
+		2、先运行 Application 类，再运行 DelayProduceTest#sendCustomeDelayMessage() 方法
+			发送消息：sendCustomeDelayMessage，时间：2020年12月25日 12:00:00
+			接收消息：sendCustomeDelayMessage，时间：2020年12月25日 12:01:30
 	
 
 
