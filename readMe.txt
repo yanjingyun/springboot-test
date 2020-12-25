@@ -342,6 +342,18 @@ springboot-test31-v3 整合elasticsearch7.6.1
 	测试参考：springboot整合elasticsearch7.postman_collection.json
 	
 
+springboot-test32: 未整合springboot，RocketMQ简单测试基础案例
+
+
+springboot-test32-v2: 整合RocketMQ，延时消息
+	测试：先启动 Application 类，在运行 DelayProduceTest#sendDelayMessage 方法
+	输出：
+		1、在DelayProduceTest看到：
+			发送消息：测试延迟消息，时间：2020年12月25日 11:41:48
+		2、在Application中看到：
+			接收消息：测试延迟消息，时间：2020年12月25日 11:42:48
+		3、说明消息在一分钟后才接收到，测试演示消息成功
+	
 
 
 
