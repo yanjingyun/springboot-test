@@ -376,3 +376,8 @@ springboot-test32-v4: 整合RocketMQ，削峰
     PS:这里属于模拟测试，生产者和消费者都写在一起
     先启动 Application 类，再运行 ProduceTest#send() 方法
     这里间隔 2s 拉取数据，每次拉取 2条，有 4个队列，所以每次拉取的数据为 2 * 4 = 8 条。
+
+springboot-test32-v4: 整合RocketMQ，广播模式
+    先启动 Application 类，再修改端口号为8081，再启动 Application 类，这样形成两个消费者集群。
+    通过运行com.yjy.ProduceTest.send发送数据，发现两个消费者都接受到消息。
+    PS：同一项目修改端口号后启动多个步骤：打开 Run/Debug Configurations -> 选择 启动类 -> allow parallel run

@@ -1,0 +1,7 @@
+server.port: 8080
+
+# 测试削峰
+rocketmq:
+  name-server: 192.168.52.133:9876
+  producer:
+    group: broadcasting-producer-group
