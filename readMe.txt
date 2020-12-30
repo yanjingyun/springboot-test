@@ -366,3 +366,8 @@ springboot-test32-v2: 整合RocketMQ，延时消息
 springboot-test32-v3: 整合RocketMQ，事务消息
 	PS:这里属于模拟测试，生产者和消费者都写在一起
 	先启动 Application 类，再运行 DelayProduceTest#send() 方法
+
+springboot-test32-v4: 整合RocketMQ，削峰
+    PS:这里属于模拟测试，生产者和消费者都写在一起
+    先启动 Application 类，再运行 ProduceTest#send() 方法
+    这里间隔 2s 拉取数据，每次拉取 2条，有 4个队列，所以每次拉取的数据为 2 * 4 = 8 条。

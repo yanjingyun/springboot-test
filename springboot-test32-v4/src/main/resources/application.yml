@@ -1,0 +1,7 @@
+server.port: 8080
+
+# 测试削峰
+rocketmq:
+  name-server: 192.168.145.128:9876
+  producer:
+    group: xf-consumer-group
