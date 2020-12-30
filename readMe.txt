@@ -344,6 +344,11 @@ springboot-test31-v3 整合elasticsearch7.6.1
 
 springboot-test32: 未整合springboot，RocketMQ简单测试基础案例
 
+springboot-test32-v1: 整合RocketMQ，顺序消费
+    PS:这里属于模拟测试，生产者和消费者都写在一起
+    测试：先启动 Application 类，在运行 DelayProduceTest#sendDelayMessage() 方法
+    一般情况下，可以使用订单号、商品号、用户编号，只要订单号在同一队列，通过队列的天生顺序执行，保证消息能顺序消费。
+    问：一个队列一个消费者，相同的id放同一队列，这样确实能保证消息顺序消费，但是这样会不会消息堆积？
 
 springboot-test32-v2: 整合RocketMQ，延时消息
 	PS:这里属于模拟测试，生产者和消费者都写在一起
