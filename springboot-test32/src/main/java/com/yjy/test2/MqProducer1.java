@@ -1,48 +1,34 @@
-package com.yjy.test2_in_order;
+package com.yjy.test2;
 
-import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
-import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
-import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.client.producer.SendResult;
-import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.Message;
-import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.common.message.MessageQueue;
-import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
-public class Producer {
-
-    @Test
-    public void testProduce() throws Exception {
-        DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
-
-        producer.setNamesrvAddr("127.0.0.1:9876");
-
+public class MqProducer1 {
+    public static void main(String[] args) throws Exception {
+        DefaultMQProducer producer = new DefaultMQProducer("a_test2_producer");
+        producer.setNamesrvAddr("192.168.145.128:9876");
         producer.start();
 
         String[] tags = new String[]{"TagA", "TagC", "TagD"};
 
-        // 订单列表
-        List<OrderStep> orderList = new Producer().buildOrders();
+        // 模拟订单列表
+        List<OrderStep> orderList = buildOrders();
 
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dateStr = sdf.format(date);
         for (int i = 0; i < 10; i++) {
             // 加个时间前缀
-            String body = dateStr + " Hello RocketMQ " + orderList.get(i);
-            Message msg = new Message("TopicTest", tags[i % tags.length], "KEY" + i, body.getBytes());
+            String body = dateStr + " 订单状态： " + orderList.get(i);
+            Message msg = new Message("a_test2_topic", tags[i % tags.length], "KEY" + i, body.getBytes());
 
             SendResult sendResult = producer.send(msg, new MessageQueueSelector() {
                 @Override
@@ -61,7 +47,6 @@ public class Producer {
 
         producer.shutdown();
     }
-
 
     /**
      * 订单的步骤
@@ -88,17 +73,14 @@ public class Producer {
 
         @Override
         public String toString() {
-            return "OrderStep{" +
-                    "orderId=" + orderId +
-                    ", desc='" + desc + '\'' +
-                    '}';
+            return "OrderStep{" + "orderId=" + orderId + ", desc='" + desc + '\'' + '}';
         }
     }
 
     /**
      * 生成模拟订单数据
      */
-    private List<OrderStep> buildOrders() {
+    private static List<OrderStep> buildOrders() {
         List<OrderStep> orderList = new ArrayList<OrderStep>();
 
         OrderStep orderDemo = new OrderStep();
@@ -153,43 +135,4 @@ public class Producer {
 
         return orderList;
     }
-
-    @Test
-    public void test_ConsumerInOrder() throws MQClientException {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name_3");
-        consumer.setNamesrvAddr("127.0.0.1:9876");
-        /**
-         * 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费<br>
-         * 如果非第一次启动，那么按照上次消费的位置继续消费
-         */
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-
-        consumer.subscribe("TopicTest", "TagA || TagC || TagD");
-
-        consumer.registerMessageListener(new MessageListenerOrderly() {
-
-            Random random = new Random();
-            @Override
-            public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
-                context.setAutoCommit(true);
-                for (MessageExt msg : msgs) {
-                    // 可以看到每个queue有唯一的consume线程来消费, 订单对每个queue(分区)有序
-                    System.out.println("consumeThread=" + Thread.currentThread().getName() + "queueId=" + msg.getQueueId() + ", content:" + new String(msg.getBody()));
-                }
-
-                try {
-                    //模拟业务逻辑处理中...
-                    TimeUnit.SECONDS.sleep(random.nextInt(10));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return ConsumeOrderlyStatus.SUCCESS;
-            }
-        });
-
-        consumer.start();
-
-        System.out.println("Consumer Started.");
-    }
-
 }

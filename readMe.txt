@@ -343,6 +343,21 @@ springboot-test31-v3 整合elasticsearch7.6.1
 	
 
 springboot-test32: 未整合springboot，RocketMQ简单测试基础案例
+	com.yjy.test1 	--测试producer的三种发送消息方式：同步、异步、单向发送
+	com.yjy.test2 	--测试顺序消息，消息按照“创建-付款-推送-完成”的顺序消费
+		实现：producer发送消息时，将相同订单号的消息发送到同一队列，利用队列天生顺序的特性保证消息能顺序消费
+	com.yjy.test3 	--测试不同消费组的消费者消费同一topic消息
+		MqProducer1发送20条消息，MqConsumer1和MqConsumer2各自都能接收到20条记录
+	com.yjy.test4 	--测试同一消费组的消费者消费不同topic的消息
+		MqProducer1向a_test4_topic1发送20条消息，MqProducer2向a_test4_topic2发送20条消息；
+		MqConsumer1 接收了 a_test4_topic1中队列2和3 的消息，但仅接收了10条消息。
+		MqConsumer2 接收了 a_test4_topic2中队列0和1 的消息，但仅接收了10条消息。
+		结论：同一消费组最好消费同一topic的消息
+	com.yjy.mq.test1 	--读写队列数、生产者数、消费者数配置，扩容，缩容问题
+		1）读写队列数配置
+		2）写队列数与生产者数配置
+		3）读队列数与消费者数配置
+
 
 springboot-test32-v1: 整合RocketMQ，顺序消费
     PS:这里属于模拟测试，生产者和消费者都写在一起
@@ -381,7 +396,7 @@ springboot-test32-v4: 整合RocketMQ，削峰
     先启动 Application 类，再运行 ProduceTest#send() 方法
     这里间隔 2s 拉取数据，每次拉取 2条，有 4个队列，所以每次拉取的数据为 2 * 4 = 8 条。
 
-springboot-test32-v4: 整合RocketMQ，广播模式
+springboot-test32-v5: 整合RocketMQ，广播模式
     先启动 Application 类，再修改端口号为8081，再启动 Application 类，这样形成两个消费者集群。
     通过运行com.yjy.ProduceTest.send发送数据，发现两个消费者都接受到消息。
     PS：同一项目修改端口号后启动多个步骤：打开 Run/Debug Configurations -> 选择 启动类 -> allow parallel run
