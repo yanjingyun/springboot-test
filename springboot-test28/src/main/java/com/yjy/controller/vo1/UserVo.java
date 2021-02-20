@@ -21,7 +21,7 @@ public class UserVo {
 	@NotNull(message = "地址对象不能为空")
 	private Adress adress;
 
-	static class Adress {
+	public static class Adress {
 		
 		@NotNull
 		@Length(min = 3, max = 10, message = "地址不能为空且长度为3~10之间")
