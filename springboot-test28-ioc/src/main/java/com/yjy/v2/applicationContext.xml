@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="beforeAdvice" class="com.yjy.v2.advice.BeforeAdvice"></bean>
+    <bean id="afterAdvice" class="com.yjy.v2.advice.AfterAdvice"></bean>
+    <bean id="compareInterceptor" class="com.yjy.v2.advice.CompareInterceptor"></bean>
+    <bean id="studentTarget" class="com.yjy.v2.StudentImpl"></bean>
+    <bean id="student" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>com.yjy.v2.Student</value>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>beforeAdvice</value>
+                <value>afterAdvice</value>
+                <value>compareInterceptor</value>
+            </list>
+        </property>
+        <property name="target">
+            <ref bean="studentTarget"/>
+        </property>
+    </bean>
+</beans>

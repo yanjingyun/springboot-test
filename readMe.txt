@@ -316,6 +316,17 @@ springboot-test27-v3： 测试死信与延时队列
 springboot-test28： 测试Validator校验工具
 	嵌套属性、集合对象校验
 
+springboot-test28-ioc: 用于测试ioc相关
+	v1版本 	--测试FactoryBean使用
+		1）通过myFactoryBean获取实现了FactoryBean接口的Bean，则会调用该接口的getObject()方法，获取到真的值。
+		2）如果通过&myFactoryBean会获取到FactoryBean实例。
+	v2版本 	--测试SpringAOP实现
+		该案例一共配置了 2个Advice和 1个Interceptor，然后这些配置都是作为ProxyFactoryBean的属性存在的，上文中已经提到FactgoryBean概念，容器在获取ProxyFactoryBean的时候其实是调用其 getObject方法。正式这个调用完成了代理逻辑的编织。
+
+		http://www.myexceptions.net/program/1649287.html --未完成！！
+
+
+
 
 springboot-test30： 测试自定义Starter
 
