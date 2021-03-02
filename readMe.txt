@@ -293,8 +293,10 @@ springboot-test25-v2: 测试mybatis-plus
 	测试分页查询
 
 
-springboot-test26： 测试Api接口文档生成工具
-	运行项目并打开浏览器输入：http://localhost:8080/swagger-ui.html
+springboot-test26： 测试Api接口文档生成工具(swagger)
+	http://localhost:8080/swagger-ui.html --文档地址
+springboot-test26-v2: 
+	http://localhost:8080/doc.html --文档地址
 
 
 springboot-test27： 测试RabbitMQ的广播模型
