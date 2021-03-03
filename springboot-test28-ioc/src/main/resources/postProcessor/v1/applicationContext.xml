@@ -1,0 +1,22 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userService" class="com.yjy.postProcessor.v1.UserService">
+        <property name="name" value="${user.name}"></property>
+    </bean>
+    <bean id="userHandler" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:postProcessor/v1/bean.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--自定义BeanFactoryPostProcessor-->
+    <bean id="myPost" class="com.yjy.postProcessor.v1.MyBeanFactoryPostProcessor"></bean>
+    <bean id="userFactoryPostProcessor" class="com.yjy.postProcessor.v1.UserFactoryPostProcessor"></bean>
+
+</beans>

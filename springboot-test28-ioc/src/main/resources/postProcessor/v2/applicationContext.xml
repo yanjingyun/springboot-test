@@ -1,0 +1,14 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="personPostProcessor" class="com.yjy.postProcessor.v2.PersonPostProcessor"/>
+    <bean id="personFactoryPostProcessor" class="com.yjy.postProcessor.v2.PersonFactoryPostProcessor"/>
+    <bean id="person" class="com.yjy.postProcessor.v2.Person" init-method="init">
+        <property name="name" value="TestAA"/>
+        <property name="age" value="18"/>
+    </bean>
+
+</beans>

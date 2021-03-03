@@ -326,6 +326,11 @@ springboot-test28-ioc: 用于测试ioc相关
 		该案例一共配置了 2个Advice和 1个Interceptor，然后这些配置都是作为ProxyFactoryBean的属性存在的，上文中已经提到FactgoryBean概念，容器在获取ProxyFactoryBean的时候其实是调用其 getObject方法。正式这个调用完成了代理逻辑的编织。
 
 		http://www.myexceptions.net/program/1649287.html --未完成！！
+	
+	com.yjy.postProcessor.v1 //测试BeanFactoryPostProcessor
+	com.yjy.postProcessor.v2 //测试BeanFactoryPostProcessor和BeanPostProcessor
+		结果分析：BeanFactoryPostProcessor 在 bean 实例化之前被调用，注意在 PersonFactoryPostProcessor 的 postProcessBeanFactory 方法中只是修改了 bean 的定义信息，即将 age 值由18改为23，此时 bean 还未实例化。 之后实例化bean，在此过程中，先调用 BeanPostProcessor 实现类中的 postProcessBeforeInitialization 方法，然后调用实现了 InitializingBean接口的 bean 类中的 afterPropertiesSet 方法，如果设置的有 init-method 方法，则也会被调用，最后再调用 BeanPostProcessor 实现类中的 postProcessAfterInitialization 方法。
+
 
 
 
