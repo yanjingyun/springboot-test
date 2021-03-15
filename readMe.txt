@@ -149,7 +149,7 @@ springboot-test11： 测试jpa添加基础字段
 			问题：怎么添加预留字段自动赋值，比如创建机构/最后更新机构等字段？
 		附：这些创建机构/最后更新机构预留字段可用其它方式实现
 			@PrePersist/@PreRemove/@PostPersist/@PostRemove/@PreUpdate/@PostUpdate/@PostLoad 注解
-	ApplicationUtils类：获取ApplicationContext和bean方法
+	ApplicationUtils类：获取ApplicationContext和bean方法，获取property属性方法
 
 springboot-test11-v2： 测试jpa添加基础字段(v2版本)
 	描述：

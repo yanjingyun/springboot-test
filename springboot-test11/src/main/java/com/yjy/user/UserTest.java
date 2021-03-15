@@ -60,4 +60,10 @@ public class UserTest {
 		User user = userDao2.findById("297ea8576c4287f2016c4287fbbc0000").get();
 		System.out.println(user);
 	}
+
+	@Test
+	public void getProperty() {
+		String property = ApplicationUtils.getProperty("spring.datasource.username");
+		System.out.println(property);
+	}
 }
