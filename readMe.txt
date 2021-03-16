@@ -226,9 +226,10 @@ springboot-test19： 测试jdbcTemplate和NamedParameterJdbcTemplate的使用
 	--1.jdbcTemplate测试
 		update() --执行insert、update、delete语句。参数可写成:new Object[] {"testAA", 2}
 		batchUpdate() --执行批量写操作语句。
-		queryForObject() --1、单列结果查询 2、封装成对象RowMapper<User>
-		query()	--执行批量读操作语句
+		queryForObject() --1、单列结果查询（驼峰命名的字段也能自动转换）
+		query()	--执行批量读操作语句（驼峰命名的字段也能自动转换）
 	--2.NamedParameterJdbcTemplate测试
+		NamedParameterJdbcTemplate提供了命名参数，用“:x”代替“?”。
 		namedParameterJdbcTemplate.update(sql, paramMap);
 	配置springboot默认日志：
 		# logging.level.root=info

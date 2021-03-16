@@ -21,6 +21,7 @@ public class User implements Serializable {
 	
 	private String name;
 	private Date birthday;
+	private String headImg;
 	
 	public User() {}
 	public User(String name, Date birthday) {
@@ -46,9 +47,17 @@ public class User implements Serializable {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
-	
+
+	public String getHeadImg() {
+		return headImg;
+	}
+
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", birthday=" + birthday + "]";
+		return "User [id=" + id + ", name=" + name + ", birthday=" + birthday + ", headImg=" + headImg + "]";
 	}
 }
